@@ -5,10 +5,7 @@
  */
 package Vista;
 
-/**
- *
- * @author ADMIN
- */
+//JFrame Formulario
 public class Reparto_Proceso extends javax.swing.JFrame {
 
     /**
