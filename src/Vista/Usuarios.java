@@ -7,7 +7,7 @@ package Vista;
 
 /**
  *
- * @author DELL
+ *interfaz para los usuarios
  */
 public class Usuarios extends javax.swing.JFrame {
 

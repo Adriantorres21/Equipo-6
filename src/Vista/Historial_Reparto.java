@@ -7,7 +7,7 @@ package Vista;
 
 /**
  *
- * @author DELL
+ Interfaz para el historial de reparto
  */
 public class Historial_Reparto extends javax.swing.JFrame {
 
