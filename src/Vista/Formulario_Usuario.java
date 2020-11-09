@@ -13,6 +13,7 @@ public class Formulario_Usuario extends javax.swing.JFrame {
      */
     public Formulario_Usuario() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

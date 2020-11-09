@@ -16,6 +16,7 @@ public class Historial_Reparto extends javax.swing.JFrame {
      */
     public Historial_Reparto() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

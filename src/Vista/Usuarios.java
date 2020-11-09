@@ -16,6 +16,7 @@ public class Usuarios extends javax.swing.JFrame {
      */
     public Usuarios() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -40,9 +41,11 @@ public class Usuarios extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(206, 174, 109));
-        setSize(new java.awt.Dimension(100, 200));
+        setPreferredSize(new java.awt.Dimension(0, 0));
+        setSize(new java.awt.Dimension(100, 100));
 
         labelUsuarios.setFont(new java.awt.Font("Arial", 0, 24));
+        getContentPane().add(labelUsuarios, java.awt.BorderLayout.CENTER);
 
         jPanel1.setBackground(new java.awt.Color(206, 174, 109));
 
@@ -105,7 +108,7 @@ public class Usuarios extends javax.swing.JFrame {
                                         .addComponent(btnAgregarUsuario)
                                         .addGap(137, 137, 137)
                                         .addComponent(btnModificarUsuario)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
                                         .addComponent(btnEliminarUsuario))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(0, 0, Short.MAX_VALUE)
@@ -141,27 +144,10 @@ public class Usuarios extends javax.swing.JFrame {
                     .addComponent(btnEliminarUsuario))
                 .addGap(38, 38, 38)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(456, Short.MAX_VALUE)
-                .addComponent(labelUsuarios)
-                .addGap(173, 173, 173))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(labelUsuarios)
-                .addGap(221, 221, 221))
-        );
+        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
