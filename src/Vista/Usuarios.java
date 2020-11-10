@@ -41,7 +41,6 @@ public class Usuarios extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(206, 174, 109));
-        setPreferredSize(new java.awt.Dimension(0, 0));
         setSize(new java.awt.Dimension(100, 100));
 
         labelUsuarios.setFont(new java.awt.Font("Arial", 0, 24));
@@ -144,7 +143,7 @@ public class Usuarios extends javax.swing.JFrame {
                     .addComponent(btnEliminarUsuario))
                 .addGap(38, 38, 38)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
