@@ -39,7 +39,7 @@
     <Container class="javax.swing.JPanel" name="panelCapReparto">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="6d" green="ae" red="ce" type="rgb"/>
+          <Color blue="ca" green="e9" red="ff" type="rgb"/>
         </Property>
       </Properties>
 

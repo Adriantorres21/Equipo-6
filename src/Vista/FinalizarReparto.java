@@ -17,6 +17,7 @@ public class FinalizarReparto extends javax.swing.JFrame {
     public FinalizarReparto() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -43,7 +44,7 @@ public class FinalizarReparto extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(206, 174, 109));
+        jPanel1.setBackground(new java.awt.Color(255, 233, 202));
         jPanel1.setPreferredSize(new java.awt.Dimension(480, 261));
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N

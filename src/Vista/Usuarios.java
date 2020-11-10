@@ -17,6 +17,7 @@ public class Usuarios extends javax.swing.JFrame {
     public Usuarios() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -46,7 +47,7 @@ public class Usuarios extends javax.swing.JFrame {
         labelUsuarios.setFont(new java.awt.Font("Arial", 0, 24));
         getContentPane().add(labelUsuarios, java.awt.BorderLayout.CENTER);
 
-        jPanel1.setBackground(new java.awt.Color(206, 174, 109));
+        jPanel1.setBackground(new java.awt.Color(255, 233, 202));
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel1.setText("Usuarios");
@@ -90,6 +91,11 @@ public class Usuarios extends javax.swing.JFrame {
         });
 
         btnEliminarUsuario.setText("Eliminar");
+        btnEliminarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarUsuarioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -153,11 +159,19 @@ public class Usuarios extends javax.swing.JFrame {
 
     private void btnAgregarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarUsuarioActionPerformed
         // TODO add your handling code here:
+        Formulario_Usuario fu = new Formulario_Usuario();
+        fu.setVisible(true);
     }//GEN-LAST:event_btnAgregarUsuarioActionPerformed
 
     private void btnModificarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarUsuarioActionPerformed
         // TODO add your handling code here:
+        Formulario_Usuario fu = new Formulario_Usuario();
+        fu.setVisible(true);
     }//GEN-LAST:event_btnModificarUsuarioActionPerformed
+
+    private void btnEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarUsuarioActionPerformed
 
     /**
      * @param args the command line arguments

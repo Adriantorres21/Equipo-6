@@ -22,7 +22,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
-        
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -50,7 +50,7 @@ public class Login extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(100, 100));
 
-        PanelfondoLogin.setBackground(new java.awt.Color(206, 174, 109));
+        PanelfondoLogin.setBackground(new java.awt.Color(255, 233, 202));
         PanelfondoLogin.setForeground(new java.awt.Color(255, 255, 255));
 
         PanelLogin.setBackground(new java.awt.Color(252, 252, 252));
@@ -66,6 +66,11 @@ public class Login extends javax.swing.JFrame {
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Entrar");
         jButton1.setBorder(null);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/User.png"))); // NOI18N
 
@@ -159,6 +164,13 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Menu m = new Menu();
+        m.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

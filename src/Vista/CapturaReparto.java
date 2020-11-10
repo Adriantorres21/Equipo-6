@@ -17,6 +17,7 @@ public class CapturaReparto extends javax.swing.JFrame {
     public CapturaReparto() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -41,7 +42,7 @@ public class CapturaReparto extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        panelCapReparto.setBackground(new java.awt.Color(206, 174, 109));
+        panelCapReparto.setBackground(new java.awt.Color(255, 233, 202));
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel2.setText("Captura de Reparto");
