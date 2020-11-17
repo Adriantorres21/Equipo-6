@@ -5,6 +5,9 @@
  */
 package Vista;
 
+import Controlador.Buscar_Usuario;
+import Controlador.ConexionBD;
+
 /**
  *
  *interfaz para los usuarios
@@ -35,7 +38,7 @@ public class Usuarios extends javax.swing.JFrame {
         txtBuscarUsuario = new javax.swing.JTextField();
         btnBuscarUsuario = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableUsuarios = new javax.swing.JTable();
         btnAgregarUsuario = new javax.swing.JButton();
         btnModificarUsuario = new javax.swing.JButton();
         btnEliminarUsuario = new javax.swing.JButton();
@@ -53,9 +56,21 @@ public class Usuarios extends javax.swing.JFrame {
         jLabel1.setText("Usuarios");
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-        btnBuscarUsuario.setText("Buscar");
+        txtBuscarUsuario.setText("Ingrese el ID o el nombre del Usuario");
+        txtBuscarUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtBuscarUsuarioMouseClicked(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        btnBuscarUsuario.setText("Buscar");
+        btnBuscarUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBuscarUsuarioMouseClicked(evt);
+            }
+        });
+
+        jTableUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
@@ -74,7 +89,7 @@ public class Usuarios extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableUsuarios);
 
         btnAgregarUsuario.setText("Agregar");
         btnAgregarUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -173,6 +188,17 @@ public class Usuarios extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEliminarUsuarioActionPerformed
 
+    private void txtBuscarUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscarUsuarioMouseClicked
+        txtBuscarUsuario.setText("");
+    }//GEN-LAST:event_txtBuscarUsuarioMouseClicked
+    
+    private void btnBuscarUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarUsuarioMouseClicked
+        String usuario = txtBuscarUsuario.getText();
+        
+        Buscar_Usuario u = new Buscar_Usuario();
+        u.Usuario(usuario,jTableUsuarios);
+    }//GEN-LAST:event_btnBuscarUsuarioMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -216,7 +242,7 @@ public class Usuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    public javax.swing.JTable jTableUsuarios;
     private javax.swing.JLabel labelUsuarios;
     private javax.swing.JTextField txtBuscarUsuario;
     // End of variables declaration//GEN-END:variables
