@@ -17,35 +17,35 @@ public class ConexionBD {
     static Connection contacto = null;
     //mysql
     private static String driver = "com.mysql.jdbc.Driver";
-    private static String cadenaConeccion ="jdbc:mysql://127.0.0.1/Panaderia_Reparto";
+    private static String cadenaConeccion ="jdbc:mysql://localhost/panaderia_reparto";
     private static String usuario="root";
     private static String contra="";
     public static Connection conMysql;
 
-    public static Connection getConexionSQL() {
-//        DESKTOP-JH0QBD0
-        String url = "jdbc:sqlserver://AdrianTorres:1433;databaseName=Panaderia_Reparto;";
-        try {               //com.microsoft.sqlserver.jdbc
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            System.out.println("Coneccion exitosa");
-        } catch (ClassNotFoundException e) {
-            JOptionPane.showMessageDialog(null, "No se pudo establecer la conexion, REVISAR DRIVER " + e.getMessage(),
-                    "Error de conexión", JOptionPane.ERROR_MESSAGE);
-        }
-        try {
-            contacto = DriverManager.getConnection(url,"sa", "adriantorr9");
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No se pudo establecer la conexion, REVISAR DRIVER " + e.getMessage(),
-                    "Error de conexión", JOptionPane.ERROR_MESSAGE);
-        }
-        return contacto;
-    }
+//    public static Connection getConexionSQL() {
+////        DESKTOP-JH0QBD0
+//        String url = "jdbc:sqlserver://AdrianTorres:1433;databaseName=Panaderia_Reparto;";
+//        try {               //com.microsoft.sqlserver.jdbc
+//            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+//            System.out.println("Coneccion exitosa");
+//        } catch (ClassNotFoundException e) {
+//            JOptionPane.showMessageDialog(null, "No se pudo establecer la conexion, REVISAR DRIVER " + e.getMessage(),
+//                    "Error de conexión", JOptionPane.ERROR_MESSAGE);
+//        }
+//        try {
+//            contacto = DriverManager.getConnection(url,"sa", "adriantorr9");
+//        } catch (SQLException e) {
+//            JOptionPane.showMessageDialog(null, "No se pudo establecer la conexion, REVISAR DRIVER " + e.getMessage(),
+//                    "Error de conexión", JOptionPane.ERROR_MESSAGE);
+//        }
+//        return contacto;
+//    }
     
     public static Connection getConexionMysql(){
         try{
             Class.forName(driver);
             conMysql=DriverManager.getConnection(cadenaConeccion, usuario, contra);
-//            System.out.println("Conexion mysql exitosa");
+            System.out.println("Conexion mysql exitosa");
         }catch(Exception e){
             System.out.println(e);
         }

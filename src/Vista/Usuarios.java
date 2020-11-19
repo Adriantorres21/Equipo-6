@@ -128,7 +128,7 @@ public class Usuarios extends javax.swing.JFrame {
                                         .addComponent(btnAgregarUsuario)
                                         .addGap(137, 137, 137)
                                         .addComponent(btnModificarUsuario)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
                                         .addComponent(btnEliminarUsuario))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(0, 0, Short.MAX_VALUE)
