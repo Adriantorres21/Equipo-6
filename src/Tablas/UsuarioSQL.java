@@ -196,5 +196,32 @@ public class UsuarioSQL {
         return arrUsu;
     }
     
+    public static String MaxUsuario(Usuario usu) {
+        String result = null, last = null;
+        ConexionBD cc = new ConexionBD();
+        Connection cn = cc.getConexionMysql();
+        PreparedStatement pst = null;
+        try {
+            pst = cn.prepareStatement("SELECT MAX(idUsuario) AS id FROM usuario");
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                last = rs.getString(1);
+            }
+            result = last;
+        } catch (SQLException e) {
+            result = "Error en la consulta: " + e.getMessage();
+        } finally {
+            try {
+                if (cn != null) {
+                    cn.close();
+                    pst.close();
+                }
+            } catch (Exception e) {
+                result = "Error: " + e;
+            }
+        }
+        return result;
+    }
+    
 }
 

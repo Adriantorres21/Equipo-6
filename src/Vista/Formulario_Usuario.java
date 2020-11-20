@@ -7,7 +7,13 @@ package Vista;
 
 //JFrame Formulario 
 
+import Modelo.Rol;
+import Modelo.Usu_rol;
 import Modelo.Usuario;
+import Tablas.RolSQL;
+import Tablas.Usu_RolSQL;
+import Tablas.UsuarioSQL;
+import static Tablas.UsuarioSQL.MaxUsuario;
 import javax.swing.JOptionPane;
 
 public class Formulario_Usuario extends javax.swing.JFrame {
@@ -17,6 +23,7 @@ public class Formulario_Usuario extends javax.swing.JFrame {
      */
     public Formulario_Usuario() {
         initComponents();
+        cargarRol(0);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
@@ -39,7 +46,7 @@ public class Formulario_Usuario extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        lista_roles = new javax.swing.JComboBox();
         a_nombre = new javax.swing.JTextField();
         ap_paterno = new javax.swing.JTextField();
         ap_materno = new javax.swing.JTextField();
@@ -91,9 +98,9 @@ public class Formulario_Usuario extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel7.setText("Dirección");
 
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        lista_roles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                lista_rolesActionPerformed(evt);
             }
         });
 
@@ -198,14 +205,15 @@ public class Formulario_Usuario extends javax.swing.JFrame {
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(ap_paterno, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(a_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(lista_roles, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(a_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(104, 104, 104)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,10 +270,9 @@ public class Formulario_Usuario extends javax.swing.JFrame {
                         .addComponent(telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(numero, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -287,7 +294,7 @@ public class Formulario_Usuario extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lista_roles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -359,9 +366,9 @@ public class Formulario_Usuario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void lista_rolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lista_rolesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_lista_rolesActionPerformed
 
     private void a_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_a_nombreActionPerformed
         // TODO add your handling code here:
@@ -395,9 +402,32 @@ public class Formulario_Usuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(a_nombre.getText().length()==0 && ap_paterno.getText().length()==0 && ap_materno.getText().length()==0 
                 && fe_naci.getDateFormatString().length() == 0 && calle.getText().length() == 0 && colonia.getText().length() == 0
-                && numero.getText().length() == 0 && usuario.getText().length() == 0 && contraseña.getText().length() == 0)
-        JOptionPane.showMessageDialog(rootPane, "Los campos no deben de estar vacios");
-        else {
+                && numero.getText().length() == 0 && telefono.getText().length() == 0 && usuario.getText().length() == 0 
+                && contraseña.getText().length() == 0 && lista_roles.getSelectedIndex() ==0)
+            JOptionPane.showMessageDialog(rootPane, "Los campos no deben de estar vacios");
+        else if (a_nombre.getText().length()==0)
+            JOptionPane.showMessageDialog(rootPane, "El campo Nombre no debe estar vacio");
+        else if (ap_paterno.getText().length()==0)
+            JOptionPane.showMessageDialog(rootPane, "El campo Apellido Paterno no debe estar vacio");
+        else if (ap_materno.getText().length()==0)
+            JOptionPane.showMessageDialog(rootPane, "El campo Apellido Materno no debe estar vacio");
+        else if (fe_naci.getDateFormatString().length()==0)
+            JOptionPane.showMessageDialog(rootPane, "El campo Fecha de nacimiento no debe estar vacio");
+        else if (calle.getText().length()==0)
+            JOptionPane.showMessageDialog(rootPane, "El campo Calle no debe estar vacio");
+        else if (colonia.getText().length()==0)
+            JOptionPane.showMessageDialog(rootPane, "El campo Colonia no debe estar vacio");
+        else if (numero.getText().length()==0)
+            JOptionPane.showMessageDialog(rootPane, "El campo Numero no debe estar vacio");
+        else if (telefono.getText().length()==0)
+            JOptionPane.showMessageDialog(rootPane, "El campo Telefono no debe estar vacio");
+        else if (usuario.getText().length()==0)
+            JOptionPane.showMessageDialog(rootPane, "El campo Usuario no debe estar vacio");
+        else if (contraseña.getText().length()==0)
+            JOptionPane.showMessageDialog(rootPane, "El campo Contraseña no debe estar vacio");
+        else if (lista_roles.getSelectedIndex() == 0)
+            JOptionPane.showMessageDialog(rootPane, "El campo Rol no debe estar vacio");
+        else { 
             Usuario usu = new Usuario();
             usu.setNom_usu(a_nombre.getText());
             usu.setApellidoP_usu(ap_paterno.getText());
@@ -406,16 +436,48 @@ public class Formulario_Usuario extends javax.swing.JFrame {
             usu.setCalle(calle.getText());
             usu.setColonia(colonia.getText());
             usu.setNumero(numero.getText());
-//            String resp = AlumnoDAO.registrarAlumno(alum);
-//            p_status.setText(resp);
-//            a_nombre.setText("");
-//            a_apellidoP.setText("");
-//            a_apellidoM.setText("");
-//            cargarAlumnos(0);
-//            cargarMateriales(0);
+            usu.setTelefono(telefono.getText());
+            String resp = UsuarioSQL.registrarUsuario(usu);
+            JOptionPane.showMessageDialog(rootPane, resp);
+            a_nombre.setText("");
+            ap_paterno.setText("");
+            ap_materno.setText("");
+            fe_naci.setDateFormatString("");
+            calle.setText("");
+            colonia.setText("");
+            numero.setText("");
+            telefono.setText("");
+            
+            //Insersición de relación Uusario-Rol
+            Rol ro = (Rol) lista_roles.getSelectedItem();
+            Usu_rol usurol = new Usu_rol();
+            Integer id = ro.getIdRol();
+            usurol.setIdRol(id);
+            usurol.setIdUsuario(Integer.parseInt(UsuarioSQL.MaxUsuario(usu)));
+            String resp1 = Usu_RolSQL.registrarUsu_Rol(usurol);
+            JOptionPane.showMessageDialog(rootPane, resp1);
+            
+            
+            cargarRol(0);
+            
+            
         }
     }//GEN-LAST:event_registrar_usuarioActionPerformed
 
+    
+    public void cargarRol(int busca){
+        int index = 1;
+        lista_roles.removeAllItems();
+        lista_roles.addItem("Selecciona un rol");
+        for(Rol prov: RolSQL.getListRol()){
+            lista_roles.addItem(prov);
+            if(prov.getIdRol() == busca){
+                lista_roles.setSelectedIndex(index);
+            }
+            index++;
+        }
+    }
+    
     private void telefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefonoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_telefonoActionPerformed
@@ -464,7 +526,6 @@ public class Formulario_Usuario extends javax.swing.JFrame {
     private javax.swing.JPasswordField contraseña;
     private com.toedter.calendar.JDateChooser fe_naci;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -484,6 +545,7 @@ public class Formulario_Usuario extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JComboBox lista_roles;
     private javax.swing.JTextField numero;
     private javax.swing.JButton registrar_usuario;
     private javax.swing.JTextField telefono;
