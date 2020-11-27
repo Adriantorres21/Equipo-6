@@ -196,7 +196,7 @@ public class UsuarioSQL {
         return arrUsu;
     }
     
-    public static String MaxUsuario(Usuario usu) {
+    public static String MaxUsuario() {
         String result = null, last = null;
         ConexionBD cc = new ConexionBD();
         Connection cn = cc.getConexionMysql();
