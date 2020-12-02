@@ -15,10 +15,12 @@ import Tablas.RolSQL;
 import Tablas.Usu_RolSQL;
 import Tablas.UsuarioSQL;
 import static Tablas.UsuarioSQL.MaxUsuario;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 public class Formulario_Usuario extends javax.swing.JFrame {
-
+    Date actual = new Date();
     /**
      * Creates new form Formulario_Usuario
      */
@@ -27,8 +29,9 @@ public class Formulario_Usuario extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         lista_roles.addItem("Seleccione");
-	lista_roles.addItem("1");
+        lista_roles.addItem("1");
         lista_roles.addItem("2");
+        fe_naci.setDate(actual);
     }
 
     /**
@@ -71,7 +74,7 @@ public class Formulario_Usuario extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         jLabel14 = new javax.swing.JLabel();
         telefono = new javax.swing.JTextField();
-        fe_naci = new datechooser.beans.DateChooserCombo();
+        fe_naci = new com.toedter.calendar.JDateChooser();
 
         jTextField6.setText("jTextField6");
 
@@ -242,7 +245,7 @@ public class Formulario_Usuario extends javax.swing.JFrame {
                                     .addComponent(jLabel12)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(0, 92, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,7 +271,7 @@ public class Formulario_Usuario extends javax.swing.JFrame {
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(colonia, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(115, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel7)
@@ -319,11 +322,15 @@ public class Formulario_Usuario extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(ap_materno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6)
-                    .addComponent(fe_naci, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabel6)
+                        .addGap(22, 22, 22))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fe_naci, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -411,6 +418,7 @@ public class Formulario_Usuario extends javax.swing.JFrame {
 
     private void registrar_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrar_usuarioActionPerformed
         // TODO add your handling code here:
+        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
         String ro = (String) lista_roles.getSelectedItem();
         if (ro == "1"){
             if(a_nombre.getText().length()==0 && ap_paterno.getText().length()==0 && ap_materno.getText().length()==0 
@@ -443,7 +451,7 @@ public class Formulario_Usuario extends javax.swing.JFrame {
                 usu.setNom_usu(a_nombre.getText());
                 usu.setApellidoP_usu(ap_paterno.getText());
                 usu.setApellidoM_usu(ap_materno.getText());
-                usu.setFe_naci(fe_naci.getText());
+                usu.setFe_naci(f.format(fe_naci.getDate()));
                 usu.setCalle(calle.getText());
                 usu.setColonia(colonia.getText());
                 usu.setNumero(numero.getText());
@@ -453,7 +461,7 @@ public class Formulario_Usuario extends javax.swing.JFrame {
                 a_nombre.setText("");
                 ap_paterno.setText("");
                 ap_materno.setText("");
-                fe_naci.setText("");
+                fe_naci.setDate(actual);
                 calle.setText("");
                 colonia.setText("");
                 numero.setText("");
@@ -502,7 +510,7 @@ public class Formulario_Usuario extends javax.swing.JFrame {
                 usu.setNom_usu(a_nombre.getText());
                 usu.setApellidoP_usu(ap_paterno.getText());
                 usu.setApellidoM_usu(ap_materno.getText());
-                usu.setFe_naci(fe_naci.getText());
+                usu.setFe_naci(f.format(fe_naci.getDate()));
                 usu.setCalle(calle.getText());
                 usu.setColonia(colonia.getText());
                 usu.setNumero(numero.getText());
@@ -512,7 +520,7 @@ public class Formulario_Usuario extends javax.swing.JFrame {
                 a_nombre.setText("");
                 ap_paterno.setText("");
                 ap_materno.setText("");
-                fe_naci.setText("");
+                fe_naci.setDate(actual);
                 calle.setText("");
                 colonia.setText("");
                 numero.setText("");
@@ -527,7 +535,7 @@ public class Formulario_Usuario extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_registrar_usuarioActionPerformed
-   
+
     private void telefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefonoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_telefonoActionPerformed
@@ -535,11 +543,10 @@ public class Formulario_Usuario extends javax.swing.JFrame {
     private void lista_rolesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_lista_rolesItemStateChanged
         // TODO add your handling code here:
         String ro = (String) lista_roles.getSelectedItem();
-        if (ro == "1"){
+        if (ro == "1") {
             usuario.setEditable(true);
             contraseña.setEditable(true);
-        }
-        else {
+        } else {
             usuario.setText(" ");
             contraseña.setText(" ");
             usuario.setEditable(false);
@@ -595,7 +602,7 @@ public class Formulario_Usuario extends javax.swing.JFrame {
     private javax.swing.JButton cerrar;
     private javax.swing.JTextField colonia;
     private javax.swing.JPasswordField contraseña;
-    private datechooser.beans.DateChooserCombo fe_naci;
+    private com.toedter.calendar.JDateChooser fe_naci;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
