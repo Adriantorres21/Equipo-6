@@ -5,20 +5,29 @@
  */
 package Controlador;
 
-import java.io.IOException;
-
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import java.io.*; 
 /**
  *
  * @author Adrian
  */
 public class GenerarPDF {
-    String ruta = "C:\\Users\\Adrian\\Desktop\\miPDF.pdf";
-    public static void main(String[] args) {
+    public static final String ruta = "C:\\Users\\Adrian\\Desktop\\mipdf.pdf";
+    
+    public void createPDF(String r) throws IOException{
+        // Aquí introduciremos el código pa ra crear el PDF.
+        PdfWriter writer = new PdfWriter(r);
+        PdfDocument pdf = new PdfDocument(writer);
+        Document doc = new Document(pdf);
+        doc.add(new Paragraph("PDF panaderia Karen"));
+        doc.close();
         
     }
     
-    public  void crearPDF(String ruta) throws IOException{
-       
-        
+    public static void main(String[] args) throws IOException {
+        new GenerarPDF().createPDF(ruta);
     }
 }

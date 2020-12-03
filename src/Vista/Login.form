@@ -105,7 +105,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
-                              <Component id="jButton1" min="-2" pref="103" max="-2" attributes="0"/>
+                              <Component id="btnEntrar" min="-2" pref="103" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
@@ -113,12 +113,12 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel1" min="-2" pref="81" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jTextField2" min="-2" pref="137" max="-2" attributes="0"/>
+                                      <Component id="txtusu" min="-2" pref="137" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel3" min="-2" pref="81" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jPasswordField1" min="-2" pref="137" max="-2" attributes="0"/>
+                                      <Component id="txtpass" min="-2" pref="137" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -139,15 +139,15 @@
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel1" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="jTextField2" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="txtusu" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel3" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="jPasswordField1" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="txtpass" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" pref="63" max="-2" attributes="0"/>
+                      <Component id="btnEntrar" min="-2" pref="63" max="-2" attributes="0"/>
                       <EmptySpace pref="48" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -170,7 +170,7 @@
                 <Property name="text" type="java.lang.String" value="Contrase&#xf1;a:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="btnEntrar">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="3e" red="5d" type="rgb"/>
@@ -184,12 +184,12 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEntrarActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField2">
+            <Component class="javax.swing.JTextField" name="txtusu">
             </Component>
-            <Component class="javax.swing.JPasswordField" name="jPasswordField1">
+            <Component class="javax.swing.JPasswordField" name="txtpass">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>

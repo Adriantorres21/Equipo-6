@@ -6,7 +6,7 @@
 package Vista;
 
 //JFrame Formulario 
-import Modelo.Login;
+import Modelo.Sesion;
 import Modelo.Rol;
 import Modelo.Usu_rol;
 import Modelo.Usuario;
@@ -418,7 +418,7 @@ public class Formulario_Usuario extends javax.swing.JFrame {
 
     private void registrar_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrar_usuarioActionPerformed
         // TODO add your handling code here:
-        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd");
         String ro = (String) lista_roles.getSelectedItem();
         if (ro == "1"){
             if(a_nombre.getText().length()==0 && ap_paterno.getText().length()==0 && ap_materno.getText().length()==0 
@@ -475,7 +475,7 @@ public class Formulario_Usuario extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, resp1);
 
                 //Inserción en tabla Login 
-                Login log = new Login();
+                Sesion log = new Sesion();
                 log.setIdUsuario(Integer.parseInt(UsuarioSQL.MaxUsuario()));
                 log.setCuenta(usuario.getText());
                 log.setPswd(contraseña.getText());

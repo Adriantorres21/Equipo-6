@@ -6,7 +6,7 @@
 package Tablas;
 
 import Controlador.ConexionBD;
-import Modelo.Login;
+import Modelo.Sesion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * @author ADMIN
  */
 public class LoginSQL {
-    public static String registrarLogin(Login log) {
+    public static String registrarLogin(Sesion log) {
         String result = null, last = null;
         ConexionBD cc = new ConexionBD();
         Connection cn = cc.getConexionMysql();
@@ -51,7 +51,7 @@ public class LoginSQL {
         return result;
     }
 
-    public static String actualizarLogin(Login log) {
+    public static String actualizarLogin(Sesion log) {
         String result = null, last = null;
         ConexionBD cc = new ConexionBD();
         Connection cn = cc.getConexionMysql();
@@ -80,8 +80,8 @@ public class LoginSQL {
         return result;
     }
 
-    public static Login buscarLogin(String clave) {
-        Login log = new Login();
+    public static Sesion buscarLogin(String clave) {
+        Sesion log = new Sesion();
         ConexionBD cc = new ConexionBD();
         Connection cn = cc.getConexionMysql();
         PreparedStatement pst = null;
@@ -138,18 +138,18 @@ public class LoginSQL {
         return result;
     }
 
-    public static ArrayList<Login> getListLogin() {
-        ArrayList<Login> lo = new ArrayList<Login>();
+    public static ArrayList<Sesion> getListLogin() {
+        ArrayList<Sesion> lo = new ArrayList<Sesion>();
         ConexionBD cc = new ConexionBD();
         Connection cn = cc.getConexionMysql();
         PreparedStatement pst = null;
-        Login log = null;
+        Sesion log = null;
         String sql = "SELECT * FROM login";
         try {
             pst = cn.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                log = new Login();
+                log = new Sesion();
                 log.setIdLogin(Integer.parseInt(rs.getString(1)));
                 log.setIdUsuario(rs.getInt(2));
                 log.setCuenta(rs.getString(3));
