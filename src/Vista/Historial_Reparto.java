@@ -7,10 +7,15 @@ package Vista;
 
 import Controlador.ConexionBD;
 import Controlador.Consulta_Historial;
+import Controlador.GenerarPDF;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,6 +31,9 @@ public class Historial_Reparto extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        Date date = new Date();
+        JDate1.setDate(date);
+        JDate2.setDate(date);
     }
 
     /**
@@ -44,10 +52,10 @@ public class Historial_Reparto extends javax.swing.JFrame {
         comboBoxID = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbInforme = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         btnBuscarHistorial = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnGenerarPdf = new javax.swing.JButton();
         JDate1 = new com.toedter.calendar.JDateChooser();
         JDate2 = new com.toedter.calendar.JDateChooser();
 
@@ -79,7 +87,7 @@ public class Historial_Reparto extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setText("De");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbInforme.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
@@ -109,7 +117,7 @@ public class Historial_Reparto extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbInforme);
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setText("a");
@@ -121,10 +129,15 @@ public class Historial_Reparto extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Generar");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnGenerarPdf.setText("Generar");
+        btnGenerarPdf.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                btnGenerarPdfMouseClicked(evt);
+            }
+        });
+        btnGenerarPdf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarPdfActionPerformed(evt);
             }
         });
 
@@ -153,7 +166,7 @@ public class Historial_Reparto extends javax.swing.JFrame {
                                         .addGap(25, 25, 25)
                                         .addComponent(btnBuscarHistorial)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jButton1))))
+                                        .addComponent(btnGenerarPdf))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(49, 49, 49)
@@ -173,7 +186,7 @@ public class Historial_Reparto extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnBuscarHistorial)
-                        .addComponent(jButton1)
+                        .addComponent(btnGenerarPdf)
                         .addComponent(jLabel2))
                     .addComponent(JDate2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,16 +217,16 @@ public class Historial_Reparto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboBoxIDActionPerformed
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void btnGenerarPdfMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenerarPdfMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_btnGenerarPdfMouseClicked
 
     private void btnBuscarHistorialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarHistorialMouseClicked
         Consulta_Historial c = new Consulta_Historial();
         try {
-            c.consultar_historial(comboBoxID, JDate1, JDate2);    
+            c.consultar_historial(comboBoxID, JDate1, JDate2);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Ingrese los datos completos",
+            JOptionPane.showMessageDialog(null, "Ingrese los datos completos",
                     "Error al procesar", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnBuscarHistorialMouseClicked
@@ -226,14 +239,30 @@ public class Historial_Reparto extends javax.swing.JFrame {
             st = con.prepareStatement(sql);
 
             ResultSet resultado = st.executeQuery();
-            
-            while(resultado.next()){
+
+            while (resultado.next()) {
                 comboBoxID.addItem(resultado.getString("idUsuario"));
             }
         } catch (SQLException ex) {
             System.out.println(ex);
         }
     }//GEN-LAST:event_comboBoxIDMouseClicked
+
+    private void btnGenerarPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarPdfActionPerformed
+        // TODO add your handling code here:
+        try {
+            SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy");
+            String fInicial = f.format(JDate1.getDate());
+            String fFinal = f.format(JDate2.getDate());
+
+            String ruta = "C:\\Users\\Adrian\\Desktop\\mipdf.pdf";
+            GenerarPDF g = new GenerarPDF();
+            g.createPDF(ruta, tbInforme, fInicial, fFinal);
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_btnGenerarPdfActionPerformed
 
     /**
      * @param args the command line arguments
@@ -274,15 +303,15 @@ public class Historial_Reparto extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser JDate1;
     private com.toedter.calendar.JDateChooser JDate2;
     private javax.swing.JButton btnBuscarHistorial;
+    private javax.swing.JButton btnGenerarPdf;
     private javax.swing.JComboBox<String> comboBoxID;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelHistorialReparto;
+    private javax.swing.JTable tbInforme;
     // End of variables declaration//GEN-END:variables
 }
