@@ -20,6 +20,8 @@ import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
 import java.awt.Desktop;
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
 
@@ -29,7 +31,6 @@ import javax.swing.table.TableModel;
  */
 public class GenerarPDF {
 
-    public static final String ruta = "C:\\Users\\Adrian\\Desktop\\mipdf.pdf";
 
     public void createPDF(String r, JTable vPrevia,String fInicial,String fFinal) throws IOException {
         // Aquí introduciremos el código pa ra crear el PDF.
@@ -40,7 +41,6 @@ public class GenerarPDF {
         Image img = new Image(ImageDataFactory.create(logo));
         img.scaleToFit(150, 150);
         PdfFont font = PdfFontFactory.createFont(FontConstants.HELVETICA);
-        PdfFont fontBold = PdfFontFactory.createFont(FontConstants.HELVETICA_BOLD);
         
         Paragraph p = new Paragraph().add(img);
 
