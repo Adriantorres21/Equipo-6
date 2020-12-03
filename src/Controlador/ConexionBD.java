@@ -45,7 +45,7 @@ public class ConexionBD {
         try{
             Class.forName(driver);
             conMysql=DriverManager.getConnection(cadenaConeccion, usuario, contra);
-            System.out.println("Conexion mysql exitosa");
+            //System.out.println("Conexion mysql exitosa");
         }catch(Exception e){
             System.out.println(e);
         }
