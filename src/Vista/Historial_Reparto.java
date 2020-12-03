@@ -31,6 +31,22 @@ public class Historial_Reparto extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        
+        try {
+            Connection con = ConexionBD.getConexionMysql();
+            String sql = "SELECT idUsuario FROM usuario";
+            PreparedStatement st;
+            st = con.prepareStatement(sql);
+
+            ResultSet resultado = st.executeQuery();
+
+            while (resultado.next()) {
+                comboBoxID.addItem(resultado.getString("idUsuario"));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        
         Date date = new Date();
         JDate1.setDate(date);
         JDate2.setDate(date);
@@ -232,20 +248,7 @@ public class Historial_Reparto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarHistorialMouseClicked
 
     private void comboBoxIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboBoxIDMouseClicked
-        try {
-            Connection con = ConexionBD.getConexionMysql();
-            String sql = "SELECT idUsuario FROM usuario";
-            PreparedStatement st;
-            st = con.prepareStatement(sql);
-
-            ResultSet resultado = st.executeQuery();
-
-            while (resultado.next()) {
-                comboBoxID.addItem(resultado.getString("idUsuario"));
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
+        
     }//GEN-LAST:event_comboBoxIDMouseClicked
 
     private void btnGenerarPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarPdfActionPerformed
