@@ -64,7 +64,7 @@
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtRepartidor" min="-2" pref="80" max="-2" attributes="0"/>
+                                      <Component id="txtBolDev" min="-2" pref="80" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -93,7 +93,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="56" max="32767" attributes="0"/>
+                  <EmptySpace pref="58" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -117,9 +117,9 @@
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtRepartidor" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtBolDev" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="30" max="32767" attributes="0"/>
+                  <EmptySpace pref="47" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnAceptar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -195,7 +195,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtPanDev">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtRepartidor">
+        <Component class="javax.swing.JTextField" name="txtBolDev">
         </Component>
       </SubComponents>
     </Container>
