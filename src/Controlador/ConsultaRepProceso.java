@@ -20,14 +20,17 @@ public class ConsultaRepProceso {
     public void llenarTbProceso(JTable tbProcess) {
         try {
             Connection conn = ConexionBD.getConexionMysql();
-            String consulta = "SELECT u.idUsuario, u.nombre,u.apPaterno, "
+            String consulta = "SELECT u.idUsuario, u.nombre,u.apPaterno,\n"
                     + "r.idReparto, p.nombre, pr.cantidad,\n"
                     + "r.fecha, r.horaSalida\n"
                     + "FROM usuario u\n"
-                    + "INNER JOIN reparto r ON r.idUsuario = u.idUsuario\n"
-                    + "INNER JOIN prod_rep pr ON pr.idReparto = r.idReparto\n"
-                    + "INNER JOIN producto p ON p.idProducto = pr.idProducto\n"
-                    + "WHERE r.estado ='En Proceso'";
+                    + "INNER JOIN reparto r \n"
+                    + "ON r.idUsuario = u.idUsuario\n"
+                    + "INNER JOIN prod_rep pr \n"
+                    + "ON pr.idReparto = r.idReparto\n"
+                    + "INNER JOIN producto p \n"
+                    + "ON p.idProducto = pr.idProducto\n"
+                    + "WHERE r.estado ='En Proceso' ORDER BY r.idReparto";
 
             Statement s = conn.createStatement();
             ResultSet resultado = s.executeQuery(consulta);
@@ -35,12 +38,12 @@ public class ConsultaRepProceso {
             String titulos[] = {"idUsuario", "nombre", "apPaterno", "idReparto",
                 "producto", "cantidad", "fecha", "horaSalida"};
 
-            DefaultTableModel tabla = new DefaultTableModel(null, titulos){
-                public boolean isCellEditable(int rowIndex, int colIndex){
+            DefaultTableModel tabla = new DefaultTableModel(null, titulos) {
+                public boolean isCellEditable(int rowIndex, int colIndex) {
                     return false;
                 }
             };
-            
+
             String registros[] = new String[8];
 
             while (resultado.next()) {

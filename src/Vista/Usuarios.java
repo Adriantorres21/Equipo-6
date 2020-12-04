@@ -188,6 +188,7 @@ public class Usuarios extends javax.swing.JFrame {
         int id = Integer.parseInt(String.valueOf(jTableUsuarios.getValueAt(fila, 0)));
         Formulario_Usuario fu = new Formulario_Usuario(id);
         fu.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnModificarUsuarioActionPerformed
 
     private void btnEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarUsuarioActionPerformed
