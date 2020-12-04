@@ -183,12 +183,27 @@ Controlador.Comparar_campos campo = new Controlador.Comparar_campos();
                 DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
                 try {
                 Connection con = ConexionBD.getConexionMysql();
-                String sql = "insert into reparto (idUsuario,fecha,horaSalida,horaRegreso,estado,pan_enviado,bolillo_enviado)"
-                        + "values ('"+comboId.getSelectedItem()+"','"+fecha+"','"+dateFormat.format(date)+"','00:00:00','En proceso','"+txtBolillo.getText()+"','"+txtPan.getText()+"');";
+                String sql = "insert into reparto (idUsuario,fecha,horaSalida,horaRegreso,estado)"
+                        + "values ('"+comboId.getSelectedItem()+"','"+fecha+"','"+dateFormat.format(date)+"','00:00:00','En proceso');";
                 Statement st;
                 st = con.createStatement();
                 st.executeUpdate(sql);
+//                
+                sql = "SELECT MAX(idReparto)as idReparto FROM reparto";
+                PreparedStatement stt;
+                stt = con.prepareStatement(sql);
 
+                ResultSet resultado = stt.executeQuery();
+                while (resultado.next()) {
+                    sql = "insert into prod_rep (idReparto,idProducto,cantidad)"
+                            + "values ('"+resultado.getString("idReparto")+"','1','"+txtPan.getText()+"');";
+                    st.executeUpdate(sql);
+
+                    sql = "insert into prod_rep (idReparto,idProducto,cantidad)"
+                            + "values ('"+resultado.getString("idReparto")+"','2','"+txtBolillo.getText()+"');";
+
+                    st.executeUpdate(sql);
+                }           
                 } catch (SQLException ex) {
                 System.out.println(ex);
                 }
