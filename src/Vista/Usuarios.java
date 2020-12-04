@@ -7,6 +7,7 @@ package Vista;
 
 import Controlador.Buscar_Usuario;
 import Controlador.ConexionBD;
+import Modelo.Usuario;
 
 /**
  *
@@ -21,6 +22,8 @@ public class Usuarios extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        Usuario u = new Usuario();
+        u.usuario(jTableUsuarios);
     }
 
     /**
@@ -174,13 +177,16 @@ public class Usuarios extends javax.swing.JFrame {
 
     private void btnAgregarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarUsuarioActionPerformed
         // TODO add your handling code here:
-        Formulario_Usuario fu = new Formulario_Usuario();
+        Formulario_Usuario fu = new Formulario_Usuario(-1);
         fu.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnAgregarUsuarioActionPerformed
 
     private void btnModificarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarUsuarioActionPerformed
         // TODO add your handling code here:
-        Formulario_Usuario fu = new Formulario_Usuario();
+        int fila = jTableUsuarios.getSelectedRow();
+        int id = Integer.parseInt(String.valueOf(jTableUsuarios.getValueAt(fila, 0)));
+        Formulario_Usuario fu = new Formulario_Usuario(id);
         fu.setVisible(true);
     }//GEN-LAST:event_btnModificarUsuarioActionPerformed
 

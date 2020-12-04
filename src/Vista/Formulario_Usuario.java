@@ -6,12 +6,11 @@
 package Vista;
 
 //JFrame Formulario 
+import Controlador.ActualizarUsuario;
 import Modelo.Sesion;
-import Modelo.Rol;
 import Modelo.Usu_rol;
 import Modelo.Usuario;
 import Tablas.LoginSQL;
-import Tablas.RolSQL;
 import Tablas.Usu_RolSQL;
 import Tablas.UsuarioSQL;
 import java.text.SimpleDateFormat;
@@ -19,11 +18,15 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 public class Formulario_Usuario extends javax.swing.JFrame {
+
+    int idU;
     Date actual = new Date();
+    Usuario u = new Usuario();
+
     /**
      * Creates new form Formulario_Usuario
      */
-    public Formulario_Usuario() {
+    public Formulario_Usuario(int id) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -31,6 +34,12 @@ public class Formulario_Usuario extends javax.swing.JFrame {
         lista_roles.addItem("1");
         lista_roles.addItem("2");
         fe_naci.setDate(actual);
+        idU = id;
+        if (idU != -1) {
+            System.out.println(id);
+            u.obtenerUsuario(idU, a_nombre, ap_paterno, ap_materno, fe_naci,
+                    telefono, calle, numero, colonia, usuario, contraseña, lista_roles);
+        }
     }
 
     /**
@@ -417,120 +426,177 @@ public class Formulario_Usuario extends javax.swing.JFrame {
 
     private void registrar_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrar_usuarioActionPerformed
         // TODO add your handling code here:
+        ActualizarUsuario au = new ActualizarUsuario();
         SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd");
         String ro = (String) lista_roles.getSelectedItem();
-        if (ro == "1"){
-            if(a_nombre.getText().length()==0 && ap_paterno.getText().length()==0 && ap_materno.getText().length()==0 
-                && calle.getText().length() == 0 && colonia.getText().length() == 0
-                && numero.getText().length() == 0 && telefono.getText().length() == 0 && usuario.getText().length() == 0 
-                && contraseña.getText().length() == 0 && lista_roles.getSelectedIndex() ==0)
+        if (ro == "1") {
+
+            if (a_nombre.getText().length() == 0 && ap_paterno.getText().length() == 0 && ap_materno.getText().length() == 0
+                    && calle.getText().length() == 0 && colonia.getText().length() == 0
+                    && numero.getText().length() == 0 && telefono.getText().length() == 0 && usuario.getText().length() == 0
+                    && contraseña.getText().length() == 0 && lista_roles.getSelectedIndex() == 0) {
                 JOptionPane.showMessageDialog(rootPane, "Los campos no deben de estar vacios");
-            else if (a_nombre.getText().length()==0)
+            } else if (a_nombre.getText().length() == 0) {
                 JOptionPane.showMessageDialog(rootPane, "El campo Nombre no debe estar vacio");
-            else if (ap_paterno.getText().length()==0)
+            } else if (ap_paterno.getText().length() == 0) {
                 JOptionPane.showMessageDialog(rootPane, "El campo Apellido Paterno no debe estar vacio");
-            else if (ap_materno.getText().length()==0)
+            } else if (ap_materno.getText().length() == 0) {
                 JOptionPane.showMessageDialog(rootPane, "El campo Apellido Materno no debe estar vacio");
-            else if (calle.getText().length()==0)
+            } else if (calle.getText().length() == 0) {
                 JOptionPane.showMessageDialog(rootPane, "El campo Calle no debe estar vacio");
-            else if (colonia.getText().length()==0)
+            } else if (colonia.getText().length() == 0) {
                 JOptionPane.showMessageDialog(rootPane, "El campo Colonia no debe estar vacio");
-            else if (numero.getText().length()==0)
+            } else if (numero.getText().length() == 0) {
                 JOptionPane.showMessageDialog(rootPane, "El campo Numero no debe estar vacio");
-            else if (telefono.getText().length()==0)
+            } else if (telefono.getText().length() == 0) {
                 JOptionPane.showMessageDialog(rootPane, "El campo Telefono no debe estar vacio");
-            else if (usuario.getText().length()==0)
+            } else if (usuario.getText().length() == 0) {
                 JOptionPane.showMessageDialog(rootPane, "El campo Usuario no debe estar vacio");
-            else if (contraseña.getText().length()==0)
+            } else if (contraseña.getText().length() == 0) {
                 JOptionPane.showMessageDialog(rootPane, "El campo Contraseña no debe estar vacio");
-            else if (lista_roles.getSelectedIndex() == 0)
+            } else if (lista_roles.getSelectedIndex() == 0) {
                 JOptionPane.showMessageDialog(rootPane, "El campo Rol no debe estar vacio");
-            else { 
-                Usuario usu = new Usuario();
-                usu.setNom_usu(a_nombre.getText());
-                usu.setApellidoP_usu(ap_paterno.getText());
-                usu.setApellidoM_usu(ap_materno.getText());
-                usu.setFe_naci(f.format(fe_naci.getDate()));
-                usu.setCalle(calle.getText());
-                usu.setColonia(colonia.getText());
-                usu.setNumero(numero.getText());
-                usu.setTelefono(telefono.getText());
-                String resp = UsuarioSQL.registrarUsuario(usu);
-                JOptionPane.showMessageDialog(rootPane, resp);
-                a_nombre.setText("");
-                ap_paterno.setText("");
-                ap_materno.setText("");
-                fe_naci.setDate(actual);
-                calle.setText("");
-                colonia.setText("");
-                numero.setText("");
-                telefono.setText("");
+            } else {
+                if (idU != -1) {
+                    au.hacerCambiosUsuario(idU, a_nombre, ap_paterno, ap_materno, fe_naci,
+                            telefono, calle, numero, colonia);
+                    au.hacerCambiosLogin(idU, usuario, contraseña);
 
-                //Inserción de relación Usuario-Rol
-                Usu_rol usurol = new Usu_rol();
-                usurol.setIdRol(Integer.parseInt(ro));
-                usurol.setIdUsuario(Integer.parseInt(UsuarioSQL.MaxUsuario()));
-                String resp1 = Usu_RolSQL.registrarUsu_Rol(usurol);
-                JOptionPane.showMessageDialog(rootPane, resp1);
+                    a_nombre.setText("");
+                    ap_paterno.setText("");
+                    ap_materno.setText("");
+                    fe_naci.setDate(actual);
+                    calle.setText("");
+                    colonia.setText("");
+                    numero.setText("");
+                    telefono.setText("");
 
-                //Inserción en tabla Login 
-                Sesion log = new Sesion();
-                log.setIdUsuario(Integer.parseInt(UsuarioSQL.MaxUsuario()));
-                log.setCuenta(usuario.getText());
-                log.setPswd(contraseña.getText());
-                String res = LoginSQL.registrarLogin(log);
-                JOptionPane.showMessageDialog(rootPane, res);
-                usuario.setText("");
-                contraseña.setText("");
+                    usuario.setText("");
+                    contraseña.setText("");
+
+                    Usuarios vu = new Usuarios();
+                    vu.setVisible(true);
+                    this.setVisible(false);
+                } else {
+                    Usuario usu = new Usuario();
+                    usu.setNom_usu(a_nombre.getText());
+                    usu.setApellidoP_usu(ap_paterno.getText());
+                    usu.setApellidoM_usu(ap_materno.getText());
+                    usu.setFe_naci(f.format(fe_naci.getDate()));
+                    usu.setCalle(calle.getText());
+                    usu.setColonia(colonia.getText());
+                    usu.setNumero(numero.getText());
+                    usu.setTelefono(telefono.getText());
+                    String resp = UsuarioSQL.registrarUsuario(usu);
+                    JOptionPane.showMessageDialog(rootPane, resp);
+                    a_nombre.setText("");
+                    ap_paterno.setText("");
+                    ap_materno.setText("");
+                    fe_naci.setDate(actual);
+                    calle.setText("");
+                    colonia.setText("");
+                    numero.setText("");
+                    telefono.setText("");
+
+                    //Inserción de relación Usuario-Rol
+                    Usu_rol usurol = new Usu_rol();
+                    usurol.setIdRol(Integer.parseInt(ro));
+                    usurol.setIdUsuario(Integer.parseInt(UsuarioSQL.MaxUsuario()));
+                    String resp1 = Usu_RolSQL.registrarUsu_Rol(usurol);
+                    JOptionPane.showMessageDialog(rootPane, resp1);
+
+                    //Inserción en tabla Login 
+                    Sesion log = new Sesion();
+                    log.setIdUsuario(Integer.parseInt(UsuarioSQL.MaxUsuario()));
+                    log.setCuenta(usuario.getText());
+                    log.setPswd(contraseña.getText());
+                    String res = LoginSQL.registrarLogin(log);
+                    JOptionPane.showMessageDialog(rootPane, res);
+                    usuario.setText("");
+                    contraseña.setText("");
+
+                    Usuarios vu = new Usuarios();
+                    vu.setVisible(true);
+                    this.setVisible(false);
+
+                }
             }
-        }   else {
-            if(a_nombre.getText().length()==0 && ap_paterno.getText().length()==0 && ap_materno.getText().length()==0 
-                && calle.getText().length() == 0 && colonia.getText().length() == 0
-                && numero.getText().length() == 0 && telefono.getText().length() == 0 && lista_roles.getSelectedIndex() ==0)
-                JOptionPane.showMessageDialog(rootPane, "Los campos no deben de estar vacios");
-            else if (a_nombre.getText().length()==0)
-                JOptionPane.showMessageDialog(rootPane, "El campo Nombre no debe estar vacio");
-            else if (ap_paterno.getText().length()==0)
-                JOptionPane.showMessageDialog(rootPane, "El campo Apellido Paterno no debe estar vacio");
-            else if (ap_materno.getText().length()==0)
-                JOptionPane.showMessageDialog(rootPane, "El campo Apellido Materno no debe estar vacio");
-            else if (calle.getText().length()==0)
-                JOptionPane.showMessageDialog(rootPane, "El campo Calle no debe estar vacio");
-            else if (colonia.getText().length()==0)
-                JOptionPane.showMessageDialog(rootPane, "El campo Colonia no debe estar vacio");
-            else if (numero.getText().length()==0)
-                JOptionPane.showMessageDialog(rootPane, "El campo Numero no debe estar vacio");
-            else if (telefono.getText().length()==0)
-                JOptionPane.showMessageDialog(rootPane, "El campo Telefono no debe estar vacio");
-            else if (lista_roles.getSelectedIndex() == 0)
-                JOptionPane.showMessageDialog(rootPane, "El campo Rol no debe estar vacio");
-            else { 
-                Usuario usu = new Usuario();
-                usu.setNom_usu(a_nombre.getText());
-                usu.setApellidoP_usu(ap_paterno.getText());
-                usu.setApellidoM_usu(ap_materno.getText());
-                usu.setFe_naci(f.format(fe_naci.getDate()));
-                usu.setCalle(calle.getText());
-                usu.setColonia(colonia.getText());
-                usu.setNumero(numero.getText());
-                usu.setTelefono(telefono.getText());
-                String resp = UsuarioSQL.registrarUsuario(usu);
-                JOptionPane.showMessageDialog(rootPane, resp);
-                a_nombre.setText("");
-                ap_paterno.setText("");
-                ap_materno.setText("");
-                fe_naci.setDate(actual);
-                calle.setText("");
-                colonia.setText("");
-                numero.setText("");
-                telefono.setText("");
 
-                //Inserción de relación Usuario-Rol
-                Usu_rol usurol = new Usu_rol();
-                usurol.setIdRol(Integer.parseInt(ro));
-                usurol.setIdUsuario(Integer.parseInt(UsuarioSQL.MaxUsuario()));
-                String resp1 = Usu_RolSQL.registrarUsu_Rol(usurol);
-                JOptionPane.showMessageDialog(rootPane, resp1);
+        } else {
+
+            if (a_nombre.getText().length() == 0 && ap_paterno.getText().length() == 0 && ap_materno.getText().length() == 0
+                    && calle.getText().length() == 0 && colonia.getText().length() == 0
+                    && numero.getText().length() == 0 && telefono.getText().length() == 0 && lista_roles.getSelectedIndex() == 0) {
+                JOptionPane.showMessageDialog(rootPane, "Los campos no deben de estar vacios");
+            } else if (a_nombre.getText().length() == 0) {
+                JOptionPane.showMessageDialog(rootPane, "El campo Nombre no debe estar vacio");
+            } else if (ap_paterno.getText().length() == 0) {
+                JOptionPane.showMessageDialog(rootPane, "El campo Apellido Paterno no debe estar vacio");
+            } else if (ap_materno.getText().length() == 0) {
+                JOptionPane.showMessageDialog(rootPane, "El campo Apellido Materno no debe estar vacio");
+            } else if (calle.getText().length() == 0) {
+                JOptionPane.showMessageDialog(rootPane, "El campo Calle no debe estar vacio");
+            } else if (colonia.getText().length() == 0) {
+                JOptionPane.showMessageDialog(rootPane, "El campo Colonia no debe estar vacio");
+            } else if (numero.getText().length() == 0) {
+                JOptionPane.showMessageDialog(rootPane, "El campo Numero no debe estar vacio");
+            } else if (telefono.getText().length() == 0) {
+                JOptionPane.showMessageDialog(rootPane, "El campo Telefono no debe estar vacio");
+            } else if (lista_roles.getSelectedIndex() == 0) {
+                JOptionPane.showMessageDialog(rootPane, "El campo Rol no debe estar vacio");
+            } else {
+                if (idU != -1) {
+                    au.hacerCambiosUsuario(idU, a_nombre, ap_paterno, ap_materno, fe_naci,
+                            telefono, calle, numero, colonia);
+                    au.hacerCambiosLogin(idU, usuario, contraseña);
+
+                    a_nombre.setText("");
+                    ap_paterno.setText("");
+                    ap_materno.setText("");
+                    fe_naci.setDate(actual);
+                    calle.setText("");
+                    colonia.setText("");
+                    numero.setText("");
+                    telefono.setText("");
+
+                    usuario.setText("");
+                    contraseña.setText("");
+
+                    Usuarios vu = new Usuarios();
+                    vu.setVisible(true);
+                    this.setVisible(false);
+                } else {
+                    Usuario usu = new Usuario();
+                    usu.setNom_usu(a_nombre.getText());
+                    usu.setApellidoP_usu(ap_paterno.getText());
+                    usu.setApellidoM_usu(ap_materno.getText());
+                    usu.setFe_naci(f.format(fe_naci.getDate()));
+                    usu.setCalle(calle.getText());
+                    usu.setColonia(colonia.getText());
+                    usu.setNumero(numero.getText());
+                    usu.setTelefono(telefono.getText());
+                    String resp = UsuarioSQL.registrarUsuario(usu);
+                    JOptionPane.showMessageDialog(rootPane, resp);
+                    a_nombre.setText("");
+                    ap_paterno.setText("");
+                    ap_materno.setText("");
+                    fe_naci.setDate(actual);
+                    calle.setText("");
+                    colonia.setText("");
+                    numero.setText("");
+                    telefono.setText("");
+
+                    //Inserción de relación Usuario-Rol
+                    Usu_rol usurol = new Usu_rol();
+                    usurol.setIdRol(Integer.parseInt(ro));
+                    usurol.setIdUsuario(Integer.parseInt(UsuarioSQL.MaxUsuario()));
+                    String resp1 = Usu_RolSQL.registrarUsu_Rol(usurol);
+                    JOptionPane.showMessageDialog(rootPane, resp1);
+
+                    Usuarios vu = new Usuarios();
+                    vu.setVisible(true);
+                    this.setVisible(false);
+                }
             }
         }
     }//GEN-LAST:event_registrar_usuarioActionPerformed
@@ -555,43 +621,46 @@ public class Formulario_Usuario extends javax.swing.JFrame {
 
     private void cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarActionPerformed
         // TODO add your handling code here:
+        Usuarios vu = new Usuarios();
+        vu.setVisible(true);
         this.dispose();
+
     }//GEN-LAST:event_cerrarActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Formulario_Usuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Formulario_Usuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Formulario_Usuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Formulario_Usuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Formulario_Usuario().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(Formulario_Usuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(Formulario_Usuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(Formulario_Usuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(Formulario_Usuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new Formulario_Usuario().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField a_nombre;
