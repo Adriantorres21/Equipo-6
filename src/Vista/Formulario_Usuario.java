@@ -14,7 +14,6 @@ import Tablas.LoginSQL;
 import Tablas.RolSQL;
 import Tablas.Usu_RolSQL;
 import Tablas.UsuarioSQL;
-import static Tablas.UsuarioSQL.MaxUsuario;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;

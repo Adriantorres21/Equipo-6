@@ -5,6 +5,9 @@
  */
 package Vista;
 
+import Controlador.ConsultaRepProceso;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ADMIN
@@ -18,6 +21,8 @@ public class Reparto_Proceso extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        ConsultaRepProceso crp = new ConsultaRepProceso();
+        crp.llenarTbProceso(tbRProc);
     }
 
     /**
@@ -34,9 +39,9 @@ public class Reparto_Proceso extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tbRProc = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnFin = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -58,7 +63,7 @@ public class Reparto_Proceso extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel1.setText("Reparto en proceso");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tbRProc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
@@ -75,8 +80,8 @@ public class Reparto_Proceso extends javax.swing.JFrame {
                 "IdUsuario", "Nombre", "ApPaterno", "ApMaterno", "Pan", "Bolillo", "Total", "Fecha", "Hora"
             }
         ));
-        jTable2.setName(""); // NOI18N
-        jScrollPane2.setViewportView(jTable2);
+        tbRProc.setName(""); // NOI18N
+        jScrollPane2.setViewportView(tbRProc);
 
         jButton1.setText("Capturar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -85,10 +90,10 @@ public class Reparto_Proceso extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Finalizar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnFin.setText("Finalizar");
+        btnFin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnFinActionPerformed(evt);
             }
         });
 
@@ -106,7 +111,7 @@ public class Reparto_Proceso extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2))
+                        .addComponent(btnFin))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
         );
@@ -118,7 +123,7 @@ public class Reparto_Proceso extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnFin))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
@@ -146,11 +151,21 @@ public class Reparto_Proceso extends javax.swing.JFrame {
         cp.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnFinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinActionPerformed
         // TODO add your handling code here:
-        FinalizarReparto fr = new FinalizarReparto();
-        fr.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+        try {
+            int fila = tbRProc.getSelectedRow();
+            int idU = Integer.parseInt(String.valueOf(tbRProc.getValueAt(fila, 0)));
+            int idR = Integer.parseInt(String.valueOf(tbRProc.getValueAt(fila, 3)));
+            String n = String.valueOf(tbRProc.getValueAt(fila, 1));
+            String apP = String.valueOf(tbRProc.getValueAt(fila, 2));
+            FinalizarReparto fr = new FinalizarReparto(idU, idR, n, apP);
+            fr.setVisible(true);
+            this.setVisible(false);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Seleccione una fila");
+        }
+    }//GEN-LAST:event_btnFinActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,13 +203,13 @@ public class Reparto_Proceso extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFin;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable tbRProc;
     // End of variables declaration//GEN-END:variables
 }
