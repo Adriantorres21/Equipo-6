@@ -105,34 +105,26 @@ public class Historial_Reparto extends javax.swing.JFrame {
 
         tbInforme.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "idUsuario", "Nombre", "Ap Paterno", "Pan Total", "Bolillo Total", "Pan Devuelto", "Bolillo Devuelto", "Pan Venta", "Bolillo Venta", "Total Devoluciones ", "Total Venta", "Fecha", "Hora Salida", "Hora Regreso"
+                "idUsuario", "Nombre", "idReparto", "Fecha", "Hora Salida", "Hora Regreso", "Producto", "Cantidad", "Total", "Total"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, true, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jScrollPane1.setViewportView(tbInforme);
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -239,8 +231,15 @@ public class Historial_Reparto extends javax.swing.JFrame {
 
     private void btnBuscarHistorialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarHistorialMouseClicked
         Consulta_Historial c = new Consulta_Historial();
+        String seleccion = (String)comboBoxID.getSelectedItem();
+        
         try {
-            c.consultar_historial(comboBoxID, JDate1, JDate2);
+            if(seleccion==null){
+                c.consultar_historial(JDate1, JDate2, tbInforme);
+            }
+            else {
+                c.consultar_historial_ID(seleccion, JDate1, JDate2, tbInforme);
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ingrese los datos completos",
                     "Error al procesar", JOptionPane.WARNING_MESSAGE);
