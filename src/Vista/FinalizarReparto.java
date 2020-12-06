@@ -27,6 +27,9 @@ public class FinalizarReparto extends javax.swing.JFrame {
         idRep=idR; //idRep
         txtNombre.setText(nombre); //Nombre
         txtApellido.setText(ap); //Apellido
+        txtId.setEnabled(false);
+        txtNombre.setEnabled(false);
+        txtApellido.setEnabled(false);
         System.out.println("Id de reparto seleccionado: "+idRep);
     }
 
@@ -255,6 +258,7 @@ public class FinalizarReparto extends javax.swing.JFrame {
 
                 txtBolDev.setText("");
                 txtPanDev.setText("");
+                JOptionPane.showMessageDialog(rootPane, "Actualización hecha con éxito");
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Por favor ingresa números solamente");
             }

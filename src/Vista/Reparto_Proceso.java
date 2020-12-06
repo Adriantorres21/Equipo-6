@@ -149,6 +149,7 @@ public class Reparto_Proceso extends javax.swing.JFrame {
         // TODO add your handling code here:
         CapturaReparto cp = new CapturaReparto();
         cp.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnFinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinActionPerformed

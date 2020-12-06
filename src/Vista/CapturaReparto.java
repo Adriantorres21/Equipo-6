@@ -214,9 +214,7 @@ public class CapturaReparto extends javax.swing.JFrame {
 
                 txtBolillo.setText("");
                 txtPan.setText("");
-                Reparto_Proceso rp = new Reparto_Proceso();
-                rp.setVisible(true);
-                this.setVisible(false);
+                JOptionPane.showMessageDialog(rootPane, "Se dio de alta el proceso con éxito");
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Por favor ingresa números solamente");
             }
