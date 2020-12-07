@@ -35,7 +35,8 @@ public class Consulta_Historial {
                     + "WHERE r.estado = 'Finalizado'\n"
                     + "AND r.fecha >= '" + fecha_inicial + "'\n"
                     + "AND r.fecha <= '" + fecha_final + "'\n"
-                    + "AND u.IdUsuario =" + ID;
+                    + "AND u.IdUsuario =" + ID
+                    + "ORDER BY u.IdUsuario";
 
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery(consulta);
@@ -90,8 +91,10 @@ public class Consulta_Historial {
                     + "ON d.idReparto = r.idReparto INNER JOIN venta v ON v.idReparto = r.idReparto "
                     + "INNER JOIN prod_rep pr ON pr.idReparto = r.idReparto INNER JOIN producto "
                     + "p ON p.idProducto = pr.idProducto "
-                    + "WHERE r.estado = 'Finalizado' AND r.fecha >= '" + fecha_inicial + "' AND r.fecha <= '"
-                    + fecha_final + "' ";
+                    + "WHERE r.estado = 'Finalizado' "
+                    + "AND r.fecha >= '" + fecha_inicial + "' AND r.fecha <= '"
+                    + fecha_final + "' "
+                    + "ORDER BY u.IdUsuario";
 
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery(consulta);

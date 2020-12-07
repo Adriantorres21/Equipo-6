@@ -51,7 +51,7 @@ public class GenerarPDF {
         pa2.add("Fecha inicial: "+fInicial+"\n");
         pa2.add("Fecha Final: "+fFinal);
 
-        Table table = new Table(new float[]{4,4,4,4,4,4,4,4,4,4,4,4,4,4});
+        Table table = new Table(new float[]{4,4,4,4,4,4,4,4,4,4});
         llenarTabla(vPrevia, table);
         
         doc.add(p);
