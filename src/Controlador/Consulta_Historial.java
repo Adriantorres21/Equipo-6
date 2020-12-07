@@ -24,8 +24,7 @@ public class Consulta_Historial {
             String fecha_inicial = f.format(fecha1.getDate());
             String fecha_final = f.format(fecha2.getDate());
 
-            String consulta = "SELECT u.idUsuario, u.nombre, r.idReparto, r.fecha, "
-                    + "r.horaSalida, r.horaRegreso, p.nombre, pr.cantidad, v.total, d.total\n"
+            String consulta = "SELECT u.idUsuario, u.nombre, r.idReparto, r.fecha, r.horaSalida, r.horaRegreso, p.nombre, pr.cantidad, v.total, d.total\n"
                     + "FROM usuario u\n"
                     + "INNER JOIN reparto r ON r.idUsuario = u.idUsuario\n"
                     + "INNER JOIN devolucion d ON d.idReparto = r.idReparto\n"
@@ -33,10 +32,12 @@ public class Consulta_Historial {
                     + "INNER JOIN prod_rep pr ON pr.idReparto = r.idReparto\n"
                     + "INNER JOIN producto p ON p.idProducto = pr.idProducto\n"
                     + "WHERE r.estado = 'Finalizado'\n"
+                    + "AND d.idProducto = p.idProducto\n"
+                    + "AND v.idProducto = p.idProducto\n"
                     + "AND r.fecha >= '" + fecha_inicial + "'\n"
                     + "AND r.fecha <= '" + fecha_final + "'\n"
-                    + "AND u.IdUsuario =" + ID
-                    + "ORDER BY u.IdUsuario";
+                    + "AND u.idUsuario = 1\n"
+                    + "ORDER BY r.idReparto";
 
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery(consulta);
@@ -52,25 +53,23 @@ public class Consulta_Historial {
 
             String registros[] = new String[10];
 
-            boolean encontrado = rs.next();
-            if (encontrado == false) {
-                JOptionPane.showMessageDialog(null, "No se encuentras registros");
-            } else {
-                while (rs.next()) {
-                    registros[0] = rs.getString(1);
-                    registros[1] = rs.getString(2);
-                    registros[2] = rs.getString(3);
-                    registros[3] = rs.getString(4);
-                    registros[4] = rs.getString(5);
-                    registros[5] = rs.getString(6);
-                    registros[6] = rs.getString(7);
-                    registros[7] = rs.getString(8);
-                    registros[8] = rs.getString(9);
-                    registros[9] = rs.getString(10);
+            while (rs.next()) {
+                registros[0] = rs.getString(1);
+                registros[1] = rs.getString(2);
+                registros[2] = rs.getString(3);
+                registros[3] = rs.getString(4);
+                registros[4] = rs.getString(5);
+                registros[5] = rs.getString(6);
+                registros[6] = rs.getString(7);
+                registros[7] = rs.getString(8);
+                registros[8] = rs.getString(9);
+                registros[9] = rs.getString(10);
 
-                    tablaModelo.addRow(registros);
-                    tabla.setModel(tablaModelo);
-                }
+                tablaModelo.addRow(registros);
+                tabla.setModel(tablaModelo);
+            }
+            if (tablaModelo.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(null, "No se encuentras registros");
             }
             con.close();
         } catch (Exception e) {
@@ -84,17 +83,19 @@ public class Consulta_Historial {
             SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd");
             String fecha_inicial = f.format(fecha1.getDate());
             String fecha_final = f.format(fecha2.getDate());
-
-            String consulta = "SELECT u.idUsuario, u.nombre, r.idReparto, r.fecha, r.horaSalida, "
-                    + "r.horaRegreso, p.nombre, pr.cantidad, v.total, d.total FROM usuario u "
-                    + "INNER JOIN reparto r ON r.idUsuario = u.idUsuario INNER JOIN devolucion d "
-                    + "ON d.idReparto = r.idReparto INNER JOIN venta v ON v.idReparto = r.idReparto "
-                    + "INNER JOIN prod_rep pr ON pr.idReparto = r.idReparto INNER JOIN producto "
-                    + "p ON p.idProducto = pr.idProducto "
-                    + "WHERE r.estado = 'Finalizado' "
-                    + "AND r.fecha >= '" + fecha_inicial + "' AND r.fecha <= '"
-                    + fecha_final + "' "
-                    + "ORDER BY u.IdUsuario";
+            String consulta = "SELECT u.idUsuario, u.nombre, r.idReparto, r.fecha, r.horaSalida, r.horaRegreso, p.nombre, pr.cantidad, v.total, d.total\n"
+                    + "FROM usuario u\n"
+                    + "INNER JOIN reparto r ON r.idUsuario = u.idUsuario\n"
+                    + "INNER JOIN devolucion d ON d.idReparto = r.idReparto\n"
+                    + "INNER JOIN venta v ON v.idReparto = r.idReparto\n"
+                    + "INNER JOIN prod_rep pr ON pr.idReparto = r.idReparto\n"
+                    + "INNER JOIN producto p ON p.idProducto = pr.idProducto\n"
+                    + "WHERE r.estado = 'Finalizado'\n"
+                    + "AND d.idProducto = p.idProducto\n"
+                    + "AND v.idProducto = p.idProducto\n"
+                    + "AND r.fecha >= '" + fecha_inicial + "'\n"
+                    + "AND r.fecha <= '" + fecha_final + "'\n"
+                    + "ORDER BY r.idReparto";
 
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery(consulta);
@@ -109,26 +110,25 @@ public class Consulta_Historial {
             };
 
             String registros[] = new String[10];
-            boolean encontrado = rs.next();
-            if (encontrado == false) {
-                JOptionPane.showMessageDialog(null, "No se encuentras registros");
-            } else {
-                while (rs.next()) {
-                    registros[0] = rs.getString(1);
-                    registros[1] = rs.getString(2);
-                    registros[2] = rs.getString(3);
-                    registros[3] = rs.getString(4);
-                    registros[4] = rs.getString(5);
-                    registros[5] = rs.getString(6);
-                    registros[6] = rs.getString(7);
-                    registros[7] = rs.getString(8);
-                    registros[8] = rs.getString(9);
-                    registros[9] = rs.getString(10);
+            while (rs.next()) {
+                registros[0] = rs.getString(1);
+                registros[1] = rs.getString(2);
+                registros[2] = rs.getString(3);
+                registros[3] = rs.getString(4);
+                registros[4] = rs.getString(5);
+                registros[5] = rs.getString(6);
+                registros[6] = rs.getString(7);
+                registros[7] = rs.getString(8);
+                registros[8] = rs.getString(9);
+                registros[9] = rs.getString(10);
 
-                    tablaModelo.addRow(registros);
-                    tabla.setModel(tablaModelo);
-                }
+                tablaModelo.addRow(registros);
+                tabla.setModel(tablaModelo);
             }
+            if (tablaModelo.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(null, "No se encuentras registros");
+            }
+
             con.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error",

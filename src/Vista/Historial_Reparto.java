@@ -17,12 +17,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
 
 /**
  *
  * Interfaz para el historial de reparto
  */
 public class Historial_Reparto extends javax.swing.JFrame {
+
     /**
      * Creates new form Historial_Reparto
      */
@@ -30,7 +32,7 @@ public class Historial_Reparto extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        
+
         try {
             Connection con = ConexionBD.getConexionMysql();
             String sql = "SELECT idUsuario FROM usuario";
@@ -45,7 +47,7 @@ public class Historial_Reparto extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-        
+
         Date date = new Date();
         JDate1.setDate(date);
         JDate2.setDate(date);
@@ -232,13 +234,12 @@ public class Historial_Reparto extends javax.swing.JFrame {
 
     private void btnBuscarHistorialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarHistorialMouseClicked
         Consulta_Historial c = new Consulta_Historial();
-        String seleccion = (String)comboBoxID.getSelectedItem();
-        
+        String seleccion = (String) comboBoxID.getSelectedItem();
+
         try {
-            if(seleccion=="idUsuario"){
+            if (seleccion == "idUsuario") {
                 c.consultar_historial(JDate1, JDate2, tbInforme);
-            }
-            else {
+            } else {
                 c.consultar_historial_ID(seleccion, JDate1, JDate2, tbInforme);
             }
         } catch (Exception e) {
@@ -248,7 +249,7 @@ public class Historial_Reparto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarHistorialMouseClicked
 
     private void comboBoxIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboBoxIDMouseClicked
-        
+
     }//GEN-LAST:event_comboBoxIDMouseClicked
 
     private void btnGenerarPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarPdfActionPerformed
@@ -261,7 +262,7 @@ public class Historial_Reparto extends javax.swing.JFrame {
             String ruta = "C:\\Users\\Adrian\\Desktop\\mipdf.pdf";
             GenerarPDF g = new GenerarPDF();
             g.createPDF(ruta, tbInforme, fInicial, fFinal);
-            
+
         } catch (Exception e) {
             System.out.println(e);
         }
