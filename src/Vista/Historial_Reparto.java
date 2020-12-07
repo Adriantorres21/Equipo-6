@@ -52,7 +52,7 @@ public class Historial_Reparto extends javax.swing.JFrame {
         JDate1.setDate(date);
         JDate2.setDate(date);
         Consulta_Historial c = new Consulta_Historial();
-        c.consultar_historial(JDate1, JDate2, tbInforme);
+        c.consultar_historial(JDate1,JDate2,tbInforme,etqTotalVenta,etqtotalDev);
     }
 
     /**
@@ -77,6 +77,8 @@ public class Historial_Reparto extends javax.swing.JFrame {
         btnGenerarPdf = new javax.swing.JButton();
         JDate1 = new com.toedter.calendar.JDateChooser();
         JDate2 = new com.toedter.calendar.JDateChooser();
+        etqTotalVenta = new javax.swing.JLabel();
+        etqtotalDev = new javax.swing.JLabel();
 
         jButton2.setText("jButton2");
 
@@ -159,7 +161,6 @@ public class Historial_Reparto extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -182,8 +183,17 @@ public class Historial_Reparto extends javax.swing.JFrame {
                                 .addComponent(jLabel1)
                                 .addGap(49, 49, 49)
                                 .addComponent(comboBoxID, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 460, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addContainerGap(269, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(etqTotalVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(38, 38, 38)
+                                .addComponent(etqtotalDev, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(46, 46, 46)))
+                        .addGap(10, 10, 10))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,7 +203,7 @@ public class Historial_Reparto extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(comboBoxID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnBuscarHistorial)
@@ -203,22 +213,26 @@ public class Historial_Reparto extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel3)
                         .addComponent(JDate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(etqTotalVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(etqtotalDev, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -238,9 +252,9 @@ public class Historial_Reparto extends javax.swing.JFrame {
 
         try {
             if (seleccion == "idUsuario") {
-                c.consultar_historial(JDate1, JDate2, tbInforme);
+                c.consultar_historial(JDate1, JDate2, tbInforme,etqTotalVenta,etqtotalDev);
             } else {
-                c.consultar_historial_ID(seleccion, JDate1, JDate2, tbInforme);
+                c.consultar_historial_ID(seleccion,JDate1,JDate2,tbInforme,etqTotalVenta,etqtotalDev);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ingrese los datos completos",
@@ -261,7 +275,7 @@ public class Historial_Reparto extends javax.swing.JFrame {
 
             String ruta = "C:\\Users\\Adrian\\Desktop\\mipdf.pdf";
             GenerarPDF g = new GenerarPDF();
-            g.createPDF(ruta, tbInforme, fInicial, fFinal);
+            g.createPDF(ruta, tbInforme,fInicial,fFinal,etqTotalVenta.getText(),etqtotalDev.getText());
 
         } catch (Exception e) {
             System.out.println(e);
@@ -309,6 +323,8 @@ public class Historial_Reparto extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarHistorial;
     private javax.swing.JButton btnGenerarPdf;
     private javax.swing.JComboBox<String> comboBoxID;
+    private javax.swing.JLabel etqTotalVenta;
+    private javax.swing.JLabel etqtotalDev;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

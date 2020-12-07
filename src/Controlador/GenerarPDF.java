@@ -32,7 +32,7 @@ import javax.swing.table.TableModel;
 public class GenerarPDF {
 
 
-    public void createPDF(String r, JTable vPrevia,String fInicial,String fFinal) throws IOException {
+    public void createPDF(String r, JTable vPrevia,String fInicial,String fFinal, String tv, String td) throws IOException {
         // Aquí introduciremos el código pa ra crear el PDF.
         String logo = "src/Imagenes/LogoPanaderiaKaren.png";
         PdfWriter writer = new PdfWriter(r);
@@ -53,7 +53,9 @@ public class GenerarPDF {
 
         Table table = new Table(new float[]{4,4,4,4,4,4,4,4,4,4});
         llenarTabla(vPrevia, table);
-        
+       
+        pa2.add("\nTotal Venta: "+tv+"\n");
+        pa2.add("Total Devoluciones: "+td);
         doc.add(p);
         doc.add(pa2);
         doc.add(table);
