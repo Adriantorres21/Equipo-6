@@ -23,7 +23,6 @@ import javax.swing.JOptionPane;
  * Interfaz para el historial de reparto
  */
 public class Historial_Reparto extends javax.swing.JFrame {
-
     /**
      * Creates new form Historial_Reparto
      */
@@ -39,7 +38,7 @@ public class Historial_Reparto extends javax.swing.JFrame {
             st = con.prepareStatement(sql);
 
             ResultSet resultado = st.executeQuery();
-
+            comboBoxID.addItem("idUsuario");
             while (resultado.next()) {
                 comboBoxID.addItem(resultado.getString("idUsuario"));
             }
@@ -50,6 +49,8 @@ public class Historial_Reparto extends javax.swing.JFrame {
         Date date = new Date();
         JDate1.setDate(date);
         JDate2.setDate(date);
+        Consulta_Historial c = new Consulta_Historial();
+        c.consultar_historial(JDate1, JDate2, tbInforme);
     }
 
     /**
@@ -234,7 +235,7 @@ public class Historial_Reparto extends javax.swing.JFrame {
         String seleccion = (String)comboBoxID.getSelectedItem();
         
         try {
-            if(seleccion==null){
+            if(seleccion=="idUsuario"){
                 c.consultar_historial(JDate1, JDate2, tbInforme);
             }
             else {
