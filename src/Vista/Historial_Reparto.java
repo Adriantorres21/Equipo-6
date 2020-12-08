@@ -8,14 +8,15 @@ package Vista;
 import Controlador.ConexionBD;
 import Controlador.Consulta_Historial;
 import Controlador.GenerarPDF;
-import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import javax.swing.JFileChooser;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 
@@ -24,6 +25,8 @@ import javax.swing.table.TableModel;
  * Interfaz para el historial de reparto
  */
 public class Historial_Reparto extends javax.swing.JFrame {
+
+    TableModel modelo;
 
     /**
      * Creates new form Historial_Reparto
@@ -52,7 +55,12 @@ public class Historial_Reparto extends javax.swing.JFrame {
         JDate1.setDate(date);
         JDate2.setDate(date);
         Consulta_Historial c = new Consulta_Historial();
-        c.consultar_historial(JDate1,JDate2,tbInforme,etqTotalVenta,etqtotalDev);
+        c.consultar_historial(JDate1, JDate2, tbInforme, etqTotalVenta, etqtotalDev, false);
+        modelo = tbInforme.getModel();
+        if (modelo.getRowCount() == 0) {
+            etqTotalVenta.setText("");
+            etqtotalDev.setText("");
+        }
     }
 
     /**
@@ -110,21 +118,7 @@ public class Historial_Reparto extends javax.swing.JFrame {
 
         tbInforme.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "idUsuario", "Nombre", "idReparto", "Fecha", "Hora Salida", "Hora Regreso", "Producto", "Cantidad", "Total", "Total"
@@ -252,9 +246,14 @@ public class Historial_Reparto extends javax.swing.JFrame {
 
         try {
             if (seleccion == "idUsuario") {
-                c.consultar_historial(JDate1, JDate2, tbInforme,etqTotalVenta,etqtotalDev);
+                c.consultar_historial(JDate1, JDate2, tbInforme, etqTotalVenta, etqtotalDev, true);
             } else {
-                c.consultar_historial_ID(seleccion,JDate1,JDate2,tbInforme,etqTotalVenta,etqtotalDev);
+                c.consultar_historial_ID(seleccion, JDate1, JDate2, tbInforme, etqTotalVenta, etqtotalDev);
+            }
+            modelo = tbInforme.getModel();
+            if (modelo.getRowCount() == 0) {
+                etqTotalVenta.setText("");
+                etqtotalDev.setText("");
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ingrese los datos completos",
@@ -268,17 +267,20 @@ public class Historial_Reparto extends javax.swing.JFrame {
 
     private void btnGenerarPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarPdfActionPerformed
         // TODO add your handling code here:
-        try {
+        TableModel modelo = tbInforme.getModel();
+        if (modelo.getRowCount() != 0) {
             SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy");
             String fInicial = f.format(JDate1.getDate());
             String fFinal = f.format(JDate2.getDate());
-
             String ruta = "C:\\Users\\Adrian\\Desktop\\mipdf.pdf";
             GenerarPDF g = new GenerarPDF();
-            g.createPDF(ruta, tbInforme,fInicial,fFinal,etqTotalVenta.getText(),etqtotalDev.getText());
-
-        } catch (Exception e) {
-            System.out.println(e);
+            try {
+                g.createPDF(ruta, tbInforme, fInicial, fFinal, etqTotalVenta.getText(), etqtotalDev.getText());
+            } catch (IOException ex) {
+                System.out.println(ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "La tabla no contiene datos");
         }
     }//GEN-LAST:event_btnGenerarPdfActionPerformed
 

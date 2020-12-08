@@ -13,6 +13,12 @@ import java.awt.Color;
  */
 public class Menu extends javax.swing.JFrame {
 
+    CapturaReparto cr = new CapturaReparto();
+    Historial_Reparto hr = new Historial_Reparto();
+    Login l = new Login();
+    Usuarios u = new Usuarios();
+    Reparto_Proceso rp = new Reparto_Proceso();
+
     /**
      * Creates new form Menu
      */
@@ -228,7 +234,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnInformeMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInformeMouseMoved
         // TODO add your handling code here:
-        btnInforme.setBackground(new java.awt.Color(115,81,53));
+        btnInforme.setBackground(new java.awt.Color(115, 81, 53));
         btnInforme.setForeground(Color.white);
     }//GEN-LAST:event_btnInformeMouseMoved
 
@@ -276,25 +282,27 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUsuariosMouseClicked
         // TODO add your handling code here:
-        Usuarios u = new Usuarios();
         u.setVisible(true);
     }//GEN-LAST:event_btnUsuariosMouseClicked
 
     private void btnRepartosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRepartosMouseClicked
         // TODO add your handling code here:
-        Reparto_Proceso rp = new Reparto_Proceso();
         rp.setVisible(true);
     }//GEN-LAST:event_btnRepartosMouseClicked
 
     private void btnInformeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInformeMouseClicked
         // TODO add your handling code here:
-        Historial_Reparto hr = new Historial_Reparto();
         hr.setVisible(true);
     }//GEN-LAST:event_btnInformeMouseClicked
 
     private void btnSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseClicked
         // TODO add your handling code here:
-        System.exit(0);
+        cr.setVisible(false);
+        hr.setVisible(false);
+        u.setVisible(false);
+        rp.setVisible(false);
+        l.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnSalirMouseClicked
 
     /**

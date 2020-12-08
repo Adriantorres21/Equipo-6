@@ -100,7 +100,8 @@ public class Consulta_Historial {
         }
     }
 
-    public void consultar_historial(JDateChooser fecha1, JDateChooser fecha2, JTable tabla, JLabel v, JLabel d) {
+    public void consultar_historial(JDateChooser fecha1, JDateChooser fecha2, 
+            JTable tabla, JLabel v, JLabel d, boolean acc) {
         try {
             SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd");
             String fecha_inicial = f.format(fecha1.getDate());
@@ -161,7 +162,7 @@ public class Consulta_Historial {
                 tablaModelo.addRow(registros);
                 tabla.setModel(tablaModelo);
             }
-            if (tablaModelo.getRowCount() == 0) {
+            if (tablaModelo.getRowCount() == 0 && acc) {
                 JOptionPane.showMessageDialog(null, "No se encuentras registros");
             } else {
                 s = con.createStatement();
