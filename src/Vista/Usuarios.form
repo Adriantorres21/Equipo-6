@@ -66,7 +66,7 @@
                                           <Component id="btnAgregarUsuario" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
                                           <Component id="btnModificarUsuario" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace pref="147" max="32767" attributes="0"/>
+                                          <EmptySpace pref="131" max="32767" attributes="0"/>
                                           <Component id="btnEliminarUsuario" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
@@ -115,8 +115,8 @@
                       <Component id="btnEliminarUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" pref="91" max="-2" attributes="0"/>
-                  <EmptySpace pref="86" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="142" max="-2" attributes="0"/>
+                  <EmptySpace pref="35" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -133,7 +133,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtBuscarUsuario">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ingrese el ID o el nombre del Usuario"/>
+            <Property name="text" type="java.lang.String" value="Ingrese el ID"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtBuscarUsuarioMouseClicked"/>

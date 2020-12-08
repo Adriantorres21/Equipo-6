@@ -62,7 +62,7 @@ public class Usuarios extends javax.swing.JFrame {
         jLabel1.setText("Usuarios");
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-        txtBuscarUsuario.setText("Ingrese el ID o el nombre del Usuario");
+        txtBuscarUsuario.setText("Ingrese el ID");
         txtBuscarUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtBuscarUsuarioMouseClicked(evt);
@@ -134,7 +134,7 @@ public class Usuarios extends javax.swing.JFrame {
                                         .addComponent(btnAgregarUsuario)
                                         .addGap(137, 137, 137)
                                         .addComponent(btnModificarUsuario)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
                                         .addComponent(btnEliminarUsuario))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(0, 0, Short.MAX_VALUE)
@@ -169,8 +169,8 @@ public class Usuarios extends javax.swing.JFrame {
                     .addComponent(btnModificarUsuario)
                     .addComponent(btnEliminarUsuario))
                 .addGap(38, 38, 38)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);

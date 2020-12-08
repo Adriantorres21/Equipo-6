@@ -189,15 +189,16 @@ public class Usuario {
         }
 
     }
+
     public void obtenerUsuario2(int id, JTextField n, JTextField apP, JTextField apM,
             JDateChooser fe, JTextField tel, JTextField calle, JTextField num,
             JTextField col, JComboBox cb) {
         try {
-            String consulta = "SELECT ur.idRol, u.nombre, u.apPaterno, u.apMaterno, "
-                    + "u.fechaNa, u.tel, u.calle, u.numCalle, u.col"
+            String consulta = "SELECT ur.idRol, u.nombre, u.apPaterno, u.apMaterno,\n"
+                    + "u.fechaNa, u.tel, u.calle, u.numCalle, u.col\n"
                     + "FROM usuario u\n"
-                    + "INNER JOIN usu_rol ur ON ur.idUsuario = u.idUsuario\n"
-                    + "WHERE u.idUsuario =" + id;
+                    + "INNER JOIN usu_rol ur ON ur.idUsuario = u.idUsuario\n" 
+                    + "WHERE u.idUsuario = "+ id;
             Connection conn = ConexionBD.getConexionMysql();
             Statement s = conn.createStatement();
             ResultSet resultado = s.executeQuery(consulta);
@@ -227,11 +228,10 @@ public class Usuario {
             Statement s = conn.createStatement();
             ResultSet resultado = s.executeQuery(consulta);
             siHay = resultado.next();
+            System.out.println(resultado.getString(1));
         } catch (Exception e) {
             System.out.println(e);
         }
         return siHay;
     }
 }
-
-
