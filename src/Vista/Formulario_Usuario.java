@@ -36,9 +36,14 @@ public class Formulario_Usuario extends javax.swing.JFrame {
         fe_naci.setDate(actual);
         idU = id;
         if (idU != -1) {
-            System.out.println(id);
-            u.obtenerUsuario(idU, a_nombre, ap_paterno, ap_materno, fe_naci,
+            if (u.verificarLog(idU)) {
+                u.obtenerUsuario1(idU, a_nombre, ap_paterno, ap_materno, fe_naci,
                     telefono, calle, numero, colonia, usuario, contraseña, lista_roles);
+            }else{
+                u.obtenerUsuario2(idU, a_nombre, ap_paterno, ap_materno, fe_naci,
+                    telefono, calle, numero, colonia,lista_roles);
+            }
+            
         }
     }
 

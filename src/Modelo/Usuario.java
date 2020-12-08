@@ -9,6 +9,7 @@ import Controlador.ConexionBD;
 import com.toedter.calendar.JDateChooser;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -156,9 +157,9 @@ public class Usuario {
 
     }
 
-    public void obtenerUsuario(int id, JTextField n, JTextField apP, JTextField apM,
-            JDateChooser fe, JTextField tel, JTextField calle, JTextField num, 
-            JTextField col, JTextField cuenta, JPasswordField pass,JComboBox cb) {
+    public void obtenerUsuario1(int id, JTextField n, JTextField apP, JTextField apM,
+            JDateChooser fe, JTextField tel, JTextField calle, JTextField num,
+            JTextField col, JTextField cuenta, JPasswordField pass, JComboBox cb) {
         try {
             String consulta = "SELECT ur.idRol, u.nombre, u.apPaterno, u.apMaterno, "
                     + "u.fechaNa, u.tel, u.calle, u.numCalle, u.col, l.cuenta, l.pswd\n"
@@ -188,4 +189,49 @@ public class Usuario {
         }
 
     }
+    public void obtenerUsuario2(int id, JTextField n, JTextField apP, JTextField apM,
+            JDateChooser fe, JTextField tel, JTextField calle, JTextField num,
+            JTextField col, JComboBox cb) {
+        try {
+            String consulta = "SELECT ur.idRol, u.nombre, u.apPaterno, u.apMaterno, "
+                    + "u.fechaNa, u.tel, u.calle, u.numCalle, u.col"
+                    + "FROM usuario u\n"
+                    + "INNER JOIN usu_rol ur ON ur.idUsuario = u.idUsuario\n"
+                    + "WHERE u.idUsuario =" + id;
+            Connection conn = ConexionBD.getConexionMysql();
+            Statement s = conn.createStatement();
+            ResultSet resultado = s.executeQuery(consulta);
+            if (resultado.next()) {
+                n.setText(resultado.getString("u.nombre"));
+                apP.setText(resultado.getString("u.apPaterno"));
+                apM.setText(resultado.getString("u.apMaterno"));
+                fe.setDate(resultado.getDate("u.fechaNa"));
+                tel.setText(resultado.getString("u.tel"));
+                calle.setText(resultado.getString("u.calle"));
+                num.setText(resultado.getString("u.numCalle"));
+                col.setText(resultado.getString("u.col"));
+                cb.setSelectedItem(resultado.getString("ur.idRol"));
+                cb.enable(false);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public boolean verificarLog(int idu) {
+        boolean siHay = false;
+
+        try {
+            String consulta = "SELECT * FROM login WHERE idUsuario = " + idu;
+            Connection conn = ConexionBD.getConexionMysql();
+            Statement s = conn.createStatement();
+            ResultSet resultado = s.executeQuery(consulta);
+            siHay = resultado.next();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return siHay;
+    }
 }
+
+
