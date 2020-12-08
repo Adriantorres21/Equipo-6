@@ -6,7 +6,6 @@
 package Vista;
 
 import Controlador.Buscar_Usuario;
-import Controlador.ConexionBD;
 import Controlador.Eliminar_Usuario;
 import Modelo.Usuario;
 import java.sql.SQLException;
@@ -200,7 +199,9 @@ public class Usuarios extends javax.swing.JFrame {
         int id = Integer.parseInt(String.valueOf(jTableUsuarios.getValueAt(fila, 0)));
         Eliminar_Usuario eu = new Eliminar_Usuario();
         try {
-            eu.drop_user(id, jTableUsuarios);
+            eu.drop_user(id);
+            Usuario u = new Usuario();
+            u.usuario(jTableUsuarios);
         } catch (SQLException ex) {
             Logger.getLogger(Usuarios.class.getName()).log(Level.SEVERE, null, ex);
         }        // TODO add your handling code here:

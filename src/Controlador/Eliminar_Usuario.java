@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class Eliminar_Usuario {
 
-    public void drop_user(int id, JTable tabla) throws SQLException {
+    public void drop_user(int id) throws SQLException {
         try {
             Connection con = ConexionBD.getConexionMysql();
 
@@ -31,35 +31,9 @@ public class Eliminar_Usuario {
                 p.executeUpdate();
 
                 JOptionPane.showMessageDialog(null, "Usuario Borrado");
-
-                String consulta = "SELECT * FROM usuario";
-                Statement s = con.createStatement();
-                ResultSet rs = s.executeQuery(consulta);
-
-                String columnas[] = {"idUsuario", "nombre", "apPaterno", "apMaterno",
-                    "col", "calle", "numCalle", "tel", "fechaNa"};
-
-                DefaultTableModel tablaModelo = new DefaultTableModel(null, columnas) {
-                    public boolean isCellEditable(int Row, int Column) {
-                        return false;
-                    }
-                };
-
-                String registros[] = new String[9];
-                while (rs.next()) {
-                    registros[0] = rs.getString(1);
-                    registros[1] = rs.getString(2);
-                    registros[2] = rs.getString(3);
-                    registros[3] = rs.getString(4);
-                    registros[4] = rs.getString(5);
-                    registros[5] = rs.getString(6);
-                    registros[6] = rs.getString(7);
-                    registros[7] = rs.getString(8);
-                    registros[8] = rs.getString(9);
-
-                    tablaModelo.addRow(registros);
-                    tabla.setModel(tablaModelo);
-                }
+            }
+            else{
+                
             }
             con.close();
         } catch (HeadlessException | SQLException e) {
