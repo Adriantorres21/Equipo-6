@@ -7,11 +7,15 @@ package Vista;
 
 import Controlador.Buscar_Usuario;
 import Controlador.ConexionBD;
+import Controlador.Eliminar_Usuario;
 import Modelo.Usuario;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
- *interfaz para los usuarios
+ * interfaz para los usuarios
  */
 public class Usuarios extends javax.swing.JFrame {
 
@@ -192,18 +196,25 @@ public class Usuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModificarUsuarioActionPerformed
 
     private void btnEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarUsuarioActionPerformed
-        // TODO add your handling code here:
+        int fila = jTableUsuarios.getSelectedRow();
+        int id = Integer.parseInt(String.valueOf(jTableUsuarios.getValueAt(fila, 0)));
+        Eliminar_Usuario eu = new Eliminar_Usuario();
+        try {
+            eu.drop_user(id, jTableUsuarios);
+        } catch (SQLException ex) {
+            Logger.getLogger(Usuarios.class.getName()).log(Level.SEVERE, null, ex);
+        }        // TODO add your handling code here:
     }//GEN-LAST:event_btnEliminarUsuarioActionPerformed
 
     private void txtBuscarUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscarUsuarioMouseClicked
         txtBuscarUsuario.setText("");
     }//GEN-LAST:event_txtBuscarUsuarioMouseClicked
-    
+
     private void btnBuscarUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarUsuarioMouseClicked
         String usuario = txtBuscarUsuario.getText();
-        
+
         Buscar_Usuario u = new Buscar_Usuario();
-        u.Usuario(usuario,jTableUsuarios);
+        u.Usuario(usuario, jTableUsuarios);
     }//GEN-LAST:event_btnBuscarUsuarioMouseClicked
 
     /**
