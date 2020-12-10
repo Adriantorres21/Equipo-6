@@ -24,6 +24,7 @@ public class Consulta_Historial {
             SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd");
             String fecha_inicial = f.format(fecha1.getDate());
             String fecha_final = f.format(fecha2.getDate());
+//            "SELECT SUM(v.total),SUM(d.total)\n"
             String totales = "SELECT SUM(v.total),SUM(d.total)\n"
                     + "FROM usuario u\n"
                     + "INNER JOIN reparto r ON r.idUsuario = u.idUsuario\n"
@@ -34,8 +35,9 @@ public class Consulta_Historial {
                     + "WHERE r.estado = 'Finalizado'\n"
                     + "AND d.idProducto = p.idProducto\n"
                     + "AND v.idProducto = p.idProducto\n"
-                    + "AND r.fecha >= '" + fecha_inicial + "'\n"
-                    + "AND r.fecha <= '" + fecha_final + "'\n"
+                    + "AND r.fecha >= '"+fecha_inicial+"'\n"
+                    + "AND r.fecha <= '"+fecha_final+"'\n"
+                    + "AND u.idUsuario ="+ID+"\n"
                     + "ORDER BY r.idReparto";
 
             String consulta = "SELECT u.idUsuario, u.nombre, r.idReparto, r.fecha, r.horaSalida, r.horaRegreso, p.nombre, pr.cantidad, v.cantidad, d.cantidad\n"
@@ -48,8 +50,9 @@ public class Consulta_Historial {
                     + "WHERE r.estado = 'Finalizado'\n"
                     + "AND d.idProducto = p.idProducto\n"
                     + "AND v.idProducto = p.idProducto\n"
-                    + "AND r.fecha >= '" + fecha_inicial + "'\n"
-                    + "AND r.fecha <= '" + fecha_final + "'\n"
+                    + "AND r.fecha >= '"+fecha_inicial+"'\n"
+                    + "AND r.fecha <= '"+fecha_final+"'\n"
+                    + "AND u.idUsuario ="+ID+"\n"
                     + "ORDER BY r.idReparto";
 
             Statement s = con.createStatement();
@@ -100,7 +103,7 @@ public class Consulta_Historial {
         }
     }
 
-    public void consultar_historial(JDateChooser fecha1, JDateChooser fecha2, 
+    public void consultar_historial(JDateChooser fecha1, JDateChooser fecha2,
             JTable tabla, JLabel v, JLabel d, boolean acc) {
         try {
             SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd");
@@ -168,8 +171,8 @@ public class Consulta_Historial {
                 s = con.createStatement();
                 rs = s.executeQuery(totales);
                 if (rs.next()) {
-                    v.setText(String.valueOf("$ "+rs.getString(1)));
-                    d.setText(String.valueOf("$ "+rs.getString(2)));
+                    v.setText(String.valueOf("$ " + rs.getString(1)));
+                    d.setText(String.valueOf("$ " + rs.getString(2)));
                 }
             }
 

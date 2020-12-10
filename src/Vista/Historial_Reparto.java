@@ -133,6 +133,11 @@ public class Historial_Reparto extends javax.swing.JFrame {
                 btnBuscarHistorialMouseClicked(evt);
             }
         });
+        btnBuscarHistorial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarHistorialActionPerformed(evt);
+            }
+        });
 
         btnGenerarPdf.setText("Generar");
         btnGenerarPdf.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -281,6 +286,10 @@ public class Historial_Reparto extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "La tabla no contiene datos");
         }
     }//GEN-LAST:event_btnGenerarPdfActionPerformed
+
+    private void btnBuscarHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarHistorialActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarHistorialActionPerformed
 
     /**
      * @param args the command line arguments
