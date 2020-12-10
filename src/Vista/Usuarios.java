@@ -9,8 +9,7 @@ import Controlador.Buscar_Usuario;
 import Controlador.Eliminar_Usuario;
 import Modelo.Usuario;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -195,16 +194,20 @@ public class Usuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModificarUsuarioActionPerformed
 
     private void btnEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarUsuarioActionPerformed
-        int fila = jTableUsuarios.getSelectedRow();
-        int id = Integer.parseInt(String.valueOf(jTableUsuarios.getValueAt(fila, 0)));
-        Eliminar_Usuario eu = new Eliminar_Usuario();
         try {
-            eu.drop_user(id);
-            Usuario u = new Usuario();
-            u.usuario(jTableUsuarios);
-        } catch (SQLException ex) {
-            Logger.getLogger(Usuarios.class.getName()).log(Level.SEVERE, null, ex);
-        }        // TODO add your handling code here:
+            int fila = jTableUsuarios.getSelectedRow();
+            if (fila>=0) {
+                int id = Integer.parseInt(String.valueOf(jTableUsuarios.getValueAt(fila, 0)));
+                Eliminar_Usuario eu = new Eliminar_Usuario();
+                eu.drop_user(id);
+                Usuario u = new Usuario();
+                u.usuario(jTableUsuarios);
+            } else {
+                JOptionPane.showMessageDialog(null,"Debe de seleccionar un usuario para eliminar");
+            }
+        } catch (NumberFormatException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "No se pudo ejecutar la eliminación");
+        }
     }//GEN-LAST:event_btnEliminarUsuarioActionPerformed
 
     private void txtBuscarUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscarUsuarioMouseClicked
