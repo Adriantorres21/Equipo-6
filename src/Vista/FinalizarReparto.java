@@ -256,11 +256,13 @@ public class FinalizarReparto extends javax.swing.JFrame {
                 txtBolDev.setText("");
                 txtPanDev.setText("");
                 JOptionPane.showMessageDialog(rootPane, "Actualización hecha con éxito");
+                this.setVisible(false);
+                Reparto_Proceso rp = new Reparto_Proceso();
+                rp.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Por favor ingresa números solamente");
             }
         }
-        this.setVisible(false);
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
