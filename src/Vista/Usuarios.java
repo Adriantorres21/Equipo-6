@@ -186,24 +186,32 @@ public class Usuarios extends javax.swing.JFrame {
 
     private void btnModificarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarUsuarioActionPerformed
         // TODO add your handling code here:
-        int fila = jTableUsuarios.getSelectedRow();
-        int id = Integer.parseInt(String.valueOf(jTableUsuarios.getValueAt(fila, 0)));
-        Formulario_Usuario fu = new Formulario_Usuario(id);
-        fu.setVisible(true);
-        this.setVisible(false);
+        try {
+            int fila = jTableUsuarios.getSelectedRow();
+            if (fila >= 0) {
+                int id = Integer.parseInt(String.valueOf(jTableUsuarios.getValueAt(fila, 0)));
+                Formulario_Usuario fu = new Formulario_Usuario(id);
+                fu.setVisible(true);
+                this.setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(null, "Debe de seleccionar un usuario para modificar");
+            }
+        } catch (Exception ex) {
+            System.out.println("");
+        }
     }//GEN-LAST:event_btnModificarUsuarioActionPerformed
 
     private void btnEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarUsuarioActionPerformed
         try {
             int fila = jTableUsuarios.getSelectedRow();
-            if (fila>=0) {
+            if (fila >= 0) {
                 int id = Integer.parseInt(String.valueOf(jTableUsuarios.getValueAt(fila, 0)));
                 Eliminar_Usuario eu = new Eliminar_Usuario();
                 eu.drop_user(id);
                 Usuario u = new Usuario();
                 u.usuario(jTableUsuarios);
             } else {
-                JOptionPane.showMessageDialog(null,"Debe de seleccionar un usuario para eliminar");
+                JOptionPane.showMessageDialog(null, "Debe de seleccionar un usuario para eliminar");
             }
         } catch (NumberFormatException | SQLException e) {
             JOptionPane.showMessageDialog(null, "No se pudo ejecutar la eliminación");
